@@ -9,13 +9,52 @@ export default function Welcome() {
   const { hasPlayedAudio, audioError, isReady } = useWelcomeAudio();
   const [mediaReady, setMediaReady] = useState(false);
   const [buttonsLoaded, setButtonsLoaded] = useState(false);
+  const [videoSize, setVideoSize] = useState({ width: 0, height: 0 });
+  const [buttonScale, setButtonScale] = useState(1);
 
-  // Trigger button loading animation with a tiny delay to allow CSS transition
+  // Trigger button loading animation with dynamic scaling based on video size
   useEffect(() => {
     const timer = setTimeout(() => {
       setButtonsLoaded(true);
     }, 50); // Very small delay to allow CSS transition to work
-    return () => clearTimeout(timer);
+
+    // Function to calculate button scale based on video size
+    const calculateButtonScale = () => {
+      const videoElement = document.querySelector('video');
+      if (videoElement) {
+        const rect = videoElement.getBoundingClientRect();
+        const baseWidth = 428; // iPhone 14 Pro Max width as reference
+        const scale = Math.max(0.6, Math.min(1.4, rect.width / baseWidth));
+        setButtonScale(scale);
+        setVideoSize({ width: rect.width, height: rect.height });
+      }
+    };
+
+    // Calculate initial scale after a short delay to ensure video is loaded
+    setTimeout(calculateButtonScale, 500);
+
+    // Recalculate on resize
+    const handleResize = () => {
+      calculateButtonScale();
+    };
+
+    window.addEventListener('resize', handleResize);
+    
+    // Also listen for video metadata loaded to get accurate dimensions
+    const videoElement = document.querySelector('video');
+    if (videoElement) {
+      videoElement.addEventListener('loadedmetadata', calculateButtonScale);
+      videoElement.addEventListener('canplay', calculateButtonScale);
+    }
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', handleResize);
+      if (videoElement) {
+        videoElement.removeEventListener('loadedmetadata', calculateButtonScale);
+        videoElement.removeEventListener('canplay', calculateButtonScale);
+      }
+    };
   }, []);
 
   return (
@@ -72,34 +111,58 @@ export default function Welcome() {
 
       {/* Content container */}
       <div className="relative z-20 h-full w-full flex items-center justify-center px-4">
-        <div className="flex flex-col items-center justify-center h-full space-y-3 sm:space-y-4 md:space-y-5 -mt-32 sm:-mt-36 md:-mt-44">
+        <div 
+          className="flex flex-col items-center justify-center h-full transition-all duration-300"
+          style={{ 
+            gap: `${16 * buttonScale}px`,
+            transform: `translateY(-${Math.min(44, 44 * buttonScale)}px)`
+          }}
+        >
           {/* Social Media Buttons */}
           <div
-            className={`flex space-x-2 sm:space-x-3 md:space-x-4 transition-opacity duration-500 ${
+            className={`flex transition-opacity duration-500 ${
               buttonsLoaded ? "opacity-100" : "opacity-0"
             }`}
-            style={{ transitionDelay: "300ms" }}
+            style={{ 
+              transitionDelay: "300ms",
+              gap: `${12 * buttonScale}px`
+            }}
           >
             <button
               onClick={() => window.open("https://instagram.com", "_blank")}
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-orange-500 text-white rounded-lg sm:rounded-xl hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
-              style={{ backgroundColor: "#FF6B35" }}
+              className="bg-orange-500 text-white hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              style={{ 
+                backgroundColor: "#FF6B35",
+                width: `${48 * buttonScale}px`,
+                height: `${48 * buttonScale}px`,
+                borderRadius: `${12 * buttonScale}px`
+              }}
             >
-              <Instagram className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+              <Instagram style={{ width: `${20 * buttonScale}px`, height: `${20 * buttonScale}px` }} />
             </button>
             <button
               onClick={() => window.open("https://facebook.com", "_blank")}
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-orange-500 text-white rounded-lg sm:rounded-xl hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
-              style={{ backgroundColor: "#FF6B35" }}
+              className="bg-orange-500 text-white hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              style={{ 
+                backgroundColor: "#FF6B35",
+                width: `${48 * buttonScale}px`,
+                height: `${48 * buttonScale}px`,
+                borderRadius: `${12 * buttonScale}px`
+              }}
             >
-              <Facebook className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+              <Facebook style={{ width: `${20 * buttonScale}px`, height: `${20 * buttonScale}px` }} />
             </button>
             <button
               onClick={() => window.open("https://youtube.com", "_blank")}
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
-              style={{ backgroundColor: "#FF6B35" }}
+              className="bg-orange-500 text-white hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              style={{ 
+                backgroundColor: "#FF6B35",
+                width: `${48 * buttonScale}px`,
+                height: `${48 * buttonScale}px`,
+                borderRadius: `${24 * buttonScale}px` // Fully rounded
+              }}
             >
-              <Youtube className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+              <Youtube style={{ width: `${20 * buttonScale}px`, height: `${20 * buttonScale}px` }} />
             </button>
           </div>
 
@@ -112,25 +175,35 @@ export default function Welcome() {
           >
             <button
               onClick={() => setLocation("/menu")}
-              className="px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 bg-white text-orange-500 rounded-full font-bold hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 border-2 sm:border-2 md:border-3 flex items-center justify-center space-x-1.5 sm:space-x-2 max-w-[200px] sm:max-w-[230px] md:max-w-[260px] h-8 sm:h-9 md:h-11"
+              className="bg-white text-orange-500 font-bold hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
               style={{
                 fontFamily: '"DM Sans", sans-serif',
                 borderColor: "#FF6B35",
                 color: "#FF6B35",
                 letterSpacing: "0.5px",
+                border: `${3 * buttonScale}px solid #FF6B35`,
+                borderRadius: `${22 * buttonScale}px`,
+                padding: `${12 * buttonScale}px ${24 * buttonScale}px`,
+                gap: `${8 * buttonScale}px`,
+                maxWidth: `${260 * buttonScale}px`,
+                height: `${44 * buttonScale}px`,
+                fontSize: `${16 * buttonScale}px`
               }}
             >
-              <Utensils className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" style={{ color: "#FF6B35" }} />
-              <span className="font-bold text-xs sm:text-sm md:text-base">EXPLORE OUR MENU</span>
+              <Utensils style={{ width: `${16 * buttonScale}px`, height: `${16 * buttonScale}px`, color: "#FF6B35" }} />
+              <span className="font-bold">EXPLORE OUR MENU</span>
             </button>
           </div>
 
           {/* Google Review Section */}
           <div
-            className={`transition-opacity duration-500 flex flex-col items-center space-y-3 sm:space-y-4 md:space-y-6 ${
+            className={`transition-opacity duration-500 flex flex-col items-center ${
               buttonsLoaded ? "opacity-100" : "opacity-0"
             }`}
-            style={{ transitionDelay: "900ms" }}
+            style={{ 
+              transitionDelay: "900ms",
+              gap: `${8 * buttonScale}px`
+            }}
           >
             <div
               onClick={() =>
@@ -142,20 +215,30 @@ export default function Welcome() {
               className="cursor-pointer text-center"
             >
               <p
-                className="text-orange-500 font-medium mb-1 sm:mb-1.5 md:mb-2 tracking-wide text-sm sm:text-base"
+                className="text-orange-500 font-medium tracking-wide"
                 style={{
                   fontFamily: '"DM Sans", sans-serif',
                   color: "#FF6B35",
+                  fontSize: `${16 * buttonScale}px`,
+                  marginBottom: `${8 * buttonScale}px`
                 }}
               >
                 Click to Rate us on Google
               </p>
-              <div className="flex space-x-0.5 sm:space-x-1 justify-center">
+              <div 
+                className="flex justify-center"
+                style={{ gap: `${4 * buttonScale}px` }}
+              >
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 hover:scale-110 transition-transform duration-200"
-                    style={{ color: "#FF6B35", fill: "#FF6B35" }}
+                    className="hover:scale-110 transition-transform duration-200"
+                    style={{ 
+                      color: "#FF6B35", 
+                      fill: "#FF6B35",
+                      width: `${24 * buttonScale}px`,
+                      height: `${24 * buttonScale}px`
+                    }}
                   />
                 ))}
               </div>
