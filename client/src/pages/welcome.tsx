@@ -627,31 +627,34 @@ export default function Welcome() {
 
       {/* Content container */}
       <div className="relative z-20 h-full w-full flex items-center justify-center px-4">
-        <div className="flex flex-col items-center justify-center h-full space-y-3 sm:space-y-4 md:space-y-5 -mt-32 sm:-mt-36 md:-mt-40">
+        <div className="flex flex-col items-center justify-center h-full space-y-12 -mt-32 sm:-mt-36 md:-mt-40">
           {/* Social Media Buttons */}
           <div 
-            className={`flex space-x-3 sm:space-x-4 md:space-x-5 transition-opacity duration-500 ${
+            className={`flex space-x-6 transition-opacity duration-500 ${
               buttonsLoaded ? 'opacity-100' : 'opacity-0'
             }`}
             style={{ transitionDelay: '300ms' }}
           >
             <button
               onClick={() => window.open("https://instagram.com", "_blank")}
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-orange-600 text-white rounded-xl hover:bg-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              className="w-16 h-16 bg-orange-500 text-white rounded-2xl hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              style={{ backgroundColor: '#FF6B35' }}
             >
-              <Instagram className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+              <Instagram className="w-9 h-9" />
             </button>
             <button
               onClick={() => window.open("https://facebook.com", "_blank")}
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-orange-600 text-white rounded-xl hover:bg-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              className="w-16 h-16 bg-orange-500 text-white rounded-2xl hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              style={{ backgroundColor: '#FF6B35' }}
             >
-              <Facebook className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+              <Facebook className="w-9 h-9" />
             </button>
             <button
               onClick={() => window.open("https://youtube.com", "_blank")}
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-orange-600 text-white rounded-full hover:bg-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              className="w-16 h-16 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              style={{ backgroundColor: '#FF6B35' }}
             >
-              <Youtube className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+              <Youtube className="w-9 h-9" />
             </button>
           </div>
 
@@ -660,15 +663,22 @@ export default function Welcome() {
             className={`transition-opacity duration-500 ${
               buttonsLoaded ? 'opacity-100' : 'opacity-0'
             }`}
-            style={{ transitionDelay: '300ms' }}
+            style={{ transitionDelay: '600ms' }}
           >
             <button
               onClick={() => setLocation("/menu")}
-              className="px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 bg-orange-600 text-white rounded-full text-sm sm:text-base md:text-lg font-bold hover:bg-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 border-2 border-orange-600 hover:border-orange-700 flex items-center justify-center space-x-2 sm:space-x-3 max-w-[200px] sm:max-w-[250px] md:max-w-[300px] w-full"
-              style={{ fontFamily: '"Arial", sans-serif' }}
+              className="px-12 py-4 bg-white text-orange-500 rounded-full text-2xl font-bold hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 border-4 flex items-center justify-center space-x-4"
+              style={{ 
+                fontFamily: '"DM Sans", sans-serif',
+                borderColor: '#FF6B35',
+                color: '#FF6B35',
+                letterSpacing: '1px',
+                minWidth: '400px',
+                height: '80px'
+              }}
             >
-              <Utensils className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
-              <span className="font-bold tracking-wide text-xs sm:text-sm md:text-base">
+              <Utensils className="w-8 h-8" style={{ color: '#FF6B35' }} />
+              <span className="font-bold text-2xl">
                 EXPLORE OUR MENU
               </span>
             </button>
@@ -676,23 +686,31 @@ export default function Welcome() {
 
           {/* Google Review Section */}
           <div 
-            className={`transition-opacity duration-500 flex flex-col items-center space-y-4 ${
+            className={`transition-opacity duration-500 flex flex-col items-center space-y-6 ${
               buttonsLoaded ? 'opacity-100' : 'opacity-0'
             }`}
-            style={{ transitionDelay: '600ms' }}
+            style={{ transitionDelay: '900ms' }}
           >
             <div 
               onClick={() => window.open("https://www.google.com/search?sca_esv=bbe24cb31649d4ed&sxsrf=AE3TifNB0rxkCBcfMPZUq4Cl7B1cbNiwbg:1755185663524&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E5hjw2IezP_Bw3k_5rJeegZLUiDytyxIWp-4-ROn9bNJsQIZRow8EYRYRoeYE65h-v896ClcNr_EJ9DJAT8e-F7HGNkWdkTzWU8S7X92urJefrzAzQ%3D%3D&q=Ming%27s+Chinese+Cuisine+Reviews&sa=X&ved=2ahUKEwie2PSP0IqPAxUBRmcHHfPGIx0Q0bkNegQIPRAD&biw=1470&bih=832&dpr=2", "_blank")}
               className="cursor-pointer text-center"
             >
-              <p className="text-orange-500 text-sm sm:text-base md:text-lg font-semibold mb-2 sm:mb-3 tracking-wide">
+              <p 
+                className="text-orange-500 text-3xl font-medium mb-4 tracking-wide"
+                style={{ 
+                  fontFamily: '"DM Sans", sans-serif',
+                  color: '#FF6B35',
+                  fontSize: '42px'
+                }}
+              >
                 Click to Rate us on Google
               </p>
-              <div className="flex space-x-1 sm:space-x-2 justify-center">
+              <div className="flex space-x-1 justify-center">
                 {[...Array(5)].map((_, i) => (
                   <Star 
                     key={i} 
-                    className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-orange-500 fill-orange-500 hover:scale-110 transition-transform duration-200"
+                    className="w-14 h-14 hover:scale-110 transition-transform duration-200"
+                    style={{ color: '#FF6B35', fill: '#FF6B35' }}
                   />
                 ))}
               </div>
