@@ -627,7 +627,7 @@ export default function Welcome() {
 
       {/* Content container */}
       <div className="relative z-20 h-full w-full flex items-center justify-center px-4">
-        <div className="flex flex-col items-center justify-center h-full space-y-3 -mt-32">
+        <div className="flex flex-col items-center justify-center h-full space-y-4 -mt-36">
           {/* Social Media Buttons */}
           <div 
             className={`flex space-x-3 transition-opacity duration-500 ${
@@ -637,21 +637,21 @@ export default function Welcome() {
           >
             <button
               onClick={() => window.open("https://instagram.com", "_blank")}
-              className="w-8 h-8 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              className="w-9 h-9 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
               style={{ backgroundColor: '#FF6B35' }}
             >
               <Instagram className="w-4 h-4" />
             </button>
             <button
               onClick={() => window.open("https://facebook.com", "_blank")}
-              className="w-8 h-8 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              className="w-9 h-9 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
               style={{ backgroundColor: '#FF6B35' }}
             >
               <Facebook className="w-4 h-4" />
             </button>
             <button
               onClick={() => window.open("https://youtube.com", "_blank")}
-              className="w-8 h-8 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              className="w-9 h-9 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
               style={{ backgroundColor: '#FF6B35' }}
             >
               <Youtube className="w-4 h-4" />
@@ -667,7 +667,7 @@ export default function Welcome() {
           >
             <button
               onClick={() => setLocation("/menu")}
-              className="px-4 py-1.5 bg-white text-orange-500 rounded-full font-bold hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 border-2 flex items-center justify-center space-x-1.5 max-w-[200px] h-8"
+              className="px-5 py-2 bg-white text-orange-500 rounded-full font-bold hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 border-2 flex items-center justify-center space-x-2 max-w-[220px] h-9"
               style={{ 
                 fontFamily: '"DM Sans", sans-serif',
                 borderColor: '#FF6B35',
@@ -675,8 +675,8 @@ export default function Welcome() {
                 letterSpacing: '0.5px'
               }}
             >
-              <Utensils className="w-3 h-3" style={{ color: '#FF6B35' }} />
-              <span className="font-bold text-xs">
+              <Utensils className="w-3.5 h-3.5" style={{ color: '#FF6B35' }} />
+              <span className="font-bold text-sm">
                 EXPLORE OUR MENU
               </span>
             </button>
@@ -702,7 +702,7 @@ export default function Welcome() {
               >
                 Click to Rate us on Google
               </p>
-              <div className="flex space-x-0.5 justify-center">
+              <div className="flex space-x-1 justify-center">
                 {[...Array(5)].map((_, i) => (
                   <Star 
                     key={i} 
