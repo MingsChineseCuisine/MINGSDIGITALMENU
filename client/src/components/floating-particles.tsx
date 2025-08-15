@@ -26,36 +26,22 @@ const particles = [
 export default function FloatingParticles() {
   return (
     <div className="fixed inset-0 pointer-events-none z-10">
-      {/* Glowy floating particles */}
+      {/* Solid white floating particles */}
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-yellow-200 opacity-80"
+          className="absolute rounded-full bg-white opacity-60"
           style={{
             top: particle.top,
             left: particle.left,
             width: `${particle.size}px`,
             height: `${particle.size}px`,
-            background: 'radial-gradient(circle, rgba(255, 255, 102, 1) 0%, rgba(255, 215, 0, 0.9) 50%, rgba(255, 215, 0, 0.3) 100%)',
-            boxShadow: `
-              0 0 ${particle.size * 2}px rgba(255, 255, 0, 0.9),
-              0 0 ${particle.size * 4}px rgba(255, 215, 0, 0.6),
-              0 0 ${particle.size * 6}px rgba(255, 215, 0, 0.3),
-              inset 0 0 ${particle.size}px rgba(255, 255, 255, 0.4)
-            `,
-            filter: 'blur(0.3px)',
           }}
           animate={{
             y: [0, -20, 0],
             x: [0, 10, 0],
-            opacity: [0.4, 1, 0.4],
-            scale: [0.8, 1.3, 0.8],
-            rotate: [0, 360],
-            filter: [
-              'brightness(1) saturate(1)',
-              'brightness(1.5) saturate(1.3)',
-              'brightness(1) saturate(1)'
-            ]
+            opacity: [0.3, 0.6, 0.3],
+            scale: [0.8, 1.2, 0.8],
           }}
           transition={{
             duration: 6 + Math.random() * 2,

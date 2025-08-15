@@ -631,7 +631,7 @@ export default function Welcome() {
 
       {/* Content container */}
       <div className="relative z-20 h-full w-full flex items-center justify-center px-4">
-        <div className="flex flex-col items-center justify-center h-full space-y-3 sm:space-y-4 md:space-y-5 mt-4 sm:mt-6">
+        <div className="flex flex-col items-center justify-center h-full space-y-3 sm:space-y-4 md:space-y-5 -mt-16 sm:-mt-20 md:-mt-24">
           {/* Social Media Buttons */}
           <div 
             className={`flex space-x-3 sm:space-x-4 md:space-x-5 transition-opacity duration-500 ${
@@ -706,7 +706,7 @@ export default function Welcome() {
       </div>
 
       {/* Custom CSS animations - keeping minimal for fade-in only */}
-      <style jsx>{`
+      <style>{`
         /* Responsive adjustments for very small screens */
         @media (max-width: 320px) {
           .space-y-4 > :not([hidden]) ~ :not([hidden]) {
