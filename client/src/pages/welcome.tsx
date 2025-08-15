@@ -627,7 +627,7 @@ export default function Welcome() {
 
       {/* Content container */}
       <div className="relative z-20 h-full w-full flex items-center justify-center px-4">
-        <div className="flex flex-col items-center justify-center h-full space-y-4 -mt-16">
+        <div className="flex flex-col items-center justify-center h-full space-y-4 -mt-24">
           {/* Social Media Buttons */}
           <div 
             className={`flex space-x-3 transition-opacity duration-500 ${
