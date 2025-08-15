@@ -53,49 +53,6 @@ interface SpeechRecognitionConstructor {
   new (): SpeechRecognition;
 }
 
-// Coupon data for the coupon carousel
-const coupons = [
-  {
-    id: 1,
-    discount: "100",
-    subtitle: "Above ₹999",
-    code: "SAVE100",
-    bgColor: "#dc2626",
-    validUntil: "December 2025"
-  },
-  {
-    id: 2,
-    discount: "150",
-    subtitle: "Above ₹1499",
-    code: "SAVE150",
-    bgColor: "#f59e0b",
-    validUntil: "December 2025"
-  },
-  {
-    id: 3,
-    discount: "200",
-    subtitle: "Above ₹1999",
-    code: "MEGA200",
-    bgColor: "#0891b2",
-    validUntil: "December 2025"
-  },
-  {
-    id: 4,
-    discount: "75",
-    subtitle: "Above ₹699",
-    code: "FIRST75",
-    bgColor: "#059669",
-    validUntil: "December 2025"
-  },
-  {
-    id: 5,
-    discount: "300",
-    subtitle: "Above ₹2999",
-    code: "ROYAL300",
-    bgColor: "#7c3aed",
-    validUntil: "December 2025"
-  }
-];
 
 // Promotional images for the carousel - Updated with new images without tint/overlay
 const promotionalImages = [
@@ -162,7 +119,6 @@ export default function Menu() {
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [currentCouponIndex, setCurrentCouponIndex] = useState(0);
   const [isListening, setIsListening] = useState(false);
   const [speechRecognition, setSpeechRecognition] = useState(null);
   const [voiceSearchSupported, setVoiceSearchSupported] = useState(false);
@@ -291,16 +247,6 @@ export default function Menu() {
     return () => clearInterval(interval);
   }, []);
 
-  // Auto-scroll carousel effect for coupons
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentCouponIndex((prevIndex) => 
-        (prevIndex + 1) % coupons.length
-      );
-    }, 3000); // Change coupon every 3 seconds
-
-    return () => clearInterval(interval);
-  }, []);
 
   // Clear search when category changes (if you want this behavior)
   const handleCategoryChange = (categoryId: string) => {
@@ -652,7 +598,7 @@ export default function Menu() {
 
       {/* Promotional Image Carousel */}
       <div className="container mx-auto px-3 sm:px-4 mb-3 sm:mb-4">
-        <div className="relative w-full h-32 sm:h-40 md:h-48 rounded-lg sm:rounded-xl overflow-hidden shadow-lg">
+        <div className="relative w-full h-40 sm:h-48 md:h-56 rounded-lg sm:rounded-xl overflow-hidden shadow-lg">
           <motion.div
             className="flex transition-transform duration-1000 ease-in-out h-full"
             style={{
@@ -691,61 +637,6 @@ export default function Menu() {
         </div>
       </div>
 
-      {/* Coupon Carousel */}
-      <div className="container mx-auto px-3 sm:px-4 mb-6 sm:mb-8">
-        <div className="relative w-full h-16 sm:h-20 overflow-hidden">
-          <motion.div
-            className="flex transition-transform duration-500 ease-in-out h-full"
-            style={{
-              transform: `translateX(-${currentCouponIndex * 100}%)`,
-            }}
-          >
-            {coupons.map((coupon) => (
-              <motion.div
-                key={coupon.id}
-                className="min-w-full h-full relative flex items-center justify-center"
-                style={{ flexShrink: 0 }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="w-full max-w-sm mx-4 h-16 relative flex overflow-hidden shadow-lg">
-                  {/* Left white section with perforations */}
-                  <div className="bg-white w-16 flex flex-col justify-center items-center relative border-dashed border-r-2 border-gray-300">
-                    {/* Top perforation circles */}
-                    <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-200 rounded-full"></div>
-                    <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-200 rounded-full"></div>
-                    
-                    {/* Discount amount */}
-                    <div className="text-center">
-                      <div className="text-lg font-bold" style={{ color: coupon.bgColor }}>
-                        ₹{coupon.discount}
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Right colored section */}
-                  <div 
-                    className="flex-1 flex flex-col justify-center px-4 text-white relative"
-                    style={{ backgroundColor: coupon.bgColor }}
-                  >
-                    {/* Side perforations */}
-                    <div className="absolute -left-1 top-2 w-2 h-2 bg-white rounded-full"></div>
-                    <div className="absolute -left-1 bottom-2 w-2 h-2 bg-white rounded-full"></div>
-                    <div className="absolute -right-1 top-2 w-2 h-2 bg-gray-200 rounded-full"></div>
-                    <div className="absolute -right-1 bottom-2 w-2 h-2 bg-gray-200 rounded-full"></div>
-                    
-                    <div className="text-center">
-                      <div className="text-lg font-bold font-serif">COUPON</div>
-                      <div className="text-xs opacity-90">{coupon.subtitle}</div>
-                      <div className="text-xs opacity-75 mt-1">VALID UNTIL {coupon.validUntil.toUpperCase()}</div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
 
       {/* Category Tabs */}
       <div className="container mx-auto px-3 sm:px-4 mb-6 sm:mb-8 md:mb-10">
