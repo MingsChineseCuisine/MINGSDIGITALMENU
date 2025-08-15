@@ -663,16 +663,43 @@ export default function Menu() {
                 }}
               >
                 {/* Image space */}
-                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-lg bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center mb-2 sm:mb-3 overflow-hidden">
-                  {(category.id === "noodle" || category.id === "noodlewithgravy") ? (
-                    <img 
-                      src="/images/noodles.png" 
-                      alt="Noodles"
-                      className="w-full h-full object-contain rounded-md"
-                    />
-                  ) : (
-                    <span className="text-gray-400 text-lg sm:text-xl md:text-2xl">📷</span>
-                  )}
+                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-lg flex items-center justify-center mb-2 sm:mb-3 overflow-hidden">
+                  {(() => {
+                    const getImageForCategory = (categoryId: string) => {
+                      const imageMap: Record<string, string> = {
+                        'soups': '/images/Soups.png',
+                        'vegstarter': '/images/Veg Starters.png',
+                        'chickenstarter': '/images/Chicken Starters.png',
+                        'prawnsstarter': '/images/Prawn Starters.png',
+                        'seafood': '/images/seafood.png',
+                        'springrolls': '/images/Spring rolls.png',
+                        'momos': '/images/momos.png',
+                        'gravies': '/images/gravies.png',
+                        'potrice': '/images/pot rice.png',
+                        'rice': '/images/rice.png',
+                        'ricewithgravy': '/images/Rice with gravy.png',
+                        'noodle': '/images/noodles.png',
+                        'noodlewithgravy': '/images/noodles.png',
+                        'thai': '/images/thai-food.png',
+                        'chopsuey': '/images/Chop suey.png',
+                        'desserts': '/images/dessert.png',
+                        'beverages': '/images/Beavrages.png',
+                        'extra': '/images/Extra.png'
+                      };
+                      return imageMap[categoryId];
+                    };
+                    
+                    const imageSrc = getImageForCategory(category.id);
+                    return imageSrc ? (
+                      <img 
+                        src={imageSrc}
+                        alt={category.displayLabel}
+                        className="w-full h-full object-contain rounded-md"
+                      />
+                    ) : (
+                      <span className="text-gray-400 text-lg sm:text-xl md:text-2xl">📷</span>
+                    );
+                  })()}
                 </div>
                 {/* Category name */}
                 <span className="text-center leading-tight">
