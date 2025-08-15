@@ -627,7 +627,7 @@ export default function Welcome() {
 
       {/* Content container */}
       <div className="relative z-20 h-full w-full flex items-center justify-center px-4">
-        <div className="flex flex-col items-center justify-center h-full space-y-4 -mt-36">
+        <div className="flex flex-col items-center justify-center h-full space-y-5 -mt-44">
           {/* Social Media Buttons */}
           <div 
             className={`flex space-x-3 transition-opacity duration-500 ${
@@ -637,24 +637,24 @@ export default function Welcome() {
           >
             <button
               onClick={() => window.open("https://instagram.com", "_blank")}
-              className="w-9 h-9 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              className="w-12 h-12 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
               style={{ backgroundColor: '#FF6B35' }}
             >
-              <Instagram className="w-4 h-4" />
+              <Instagram className="w-5 h-5" />
             </button>
             <button
               onClick={() => window.open("https://facebook.com", "_blank")}
-              className="w-9 h-9 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              className="w-12 h-12 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
               style={{ backgroundColor: '#FF6B35' }}
             >
-              <Facebook className="w-4 h-4" />
+              <Facebook className="w-5 h-5" />
             </button>
             <button
               onClick={() => window.open("https://youtube.com", "_blank")}
-              className="w-9 h-9 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              className="w-12 h-12 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
               style={{ backgroundColor: '#FF6B35' }}
             >
-              <Youtube className="w-4 h-4" />
+              <Youtube className="w-5 h-5" />
             </button>
           </div>
 
@@ -667,7 +667,7 @@ export default function Welcome() {
           >
             <button
               onClick={() => setLocation("/menu")}
-              className="px-5 py-2 bg-white text-orange-500 rounded-full font-bold hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 border-2 flex items-center justify-center space-x-2 max-w-[220px] h-9"
+              className="px-6 py-3 bg-white text-orange-500 rounded-full font-bold hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 border-3 flex items-center justify-center space-x-2 max-w-[260px] h-11"
               style={{ 
                 fontFamily: '"DM Sans", sans-serif',
                 borderColor: '#FF6B35',
@@ -675,8 +675,8 @@ export default function Welcome() {
                 letterSpacing: '0.5px'
               }}
             >
-              <Utensils className="w-3.5 h-3.5" style={{ color: '#FF6B35' }} />
-              <span className="font-bold text-sm">
+              <Utensils className="w-4 h-4" style={{ color: '#FF6B35' }} />
+              <span className="font-bold text-base">
                 EXPLORE OUR MENU
               </span>
             </button>
@@ -694,7 +694,7 @@ export default function Welcome() {
               className="cursor-pointer text-center"
             >
               <p 
-                className="text-orange-500 font-medium mb-1.5 tracking-wide text-sm"
+                className="text-orange-500 font-medium mb-2 tracking-wide text-base"
                 style={{ 
                   fontFamily: '"DM Sans", sans-serif',
                   color: '#FF6B35'
@@ -706,7 +706,7 @@ export default function Welcome() {
                 {[...Array(5)].map((_, i) => (
                   <Star 
                     key={i} 
-                    className="w-5 h-5 hover:scale-110 transition-transform duration-200"
+                    className="w-6 h-6 hover:scale-110 transition-transform duration-200"
                     style={{ color: '#FF6B35', fill: '#FF6B35' }}
                   />
                 ))}
