@@ -641,21 +641,21 @@ export default function Welcome() {
           >
             <button
               onClick={() => window.open("https://instagram.com", "_blank")}
-              className="p-2 sm:p-3 md:p-3.5 bg-black bg-opacity-50 text-white rounded-full border border-white hover:bg-gray-900 hover:border-gray-300 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95 backdrop-blur-sm"
+              className="w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 bg-orange-600 text-white rounded-2xl hover:bg-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
             >
-              <Instagram className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+              <Instagram className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
             </button>
             <button
               onClick={() => window.open("https://facebook.com", "_blank")}
-              className="p-2 sm:p-3 md:p-3.5 bg-black bg-opacity-50 text-white rounded-full border border-white hover:bg-gray-900 hover:border-gray-300 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95 backdrop-blur-sm"
+              className="w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 bg-orange-600 text-white rounded-2xl hover:bg-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
             >
-              <Facebook className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+              <Facebook className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
             </button>
             <button
               onClick={() => window.open("https://youtube.com", "_blank")}
-              className="p-2 sm:p-3 md:p-3.5 bg-black bg-opacity-50 text-white rounded-full border border-white hover:bg-gray-900 hover:border-gray-300 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95 backdrop-blur-sm"
+              className="w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 bg-orange-600 text-white rounded-full hover:bg-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
             >
-              <Youtube className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+              <Youtube className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
             </button>
           </div>
 
@@ -668,52 +668,39 @@ export default function Welcome() {
           >
             <button
               onClick={() => setLocation("/menu")}
-              className="px-4 py-2 sm:px-5 sm:py-2.5 md:px-7 md:py-3 bg-black bg-opacity-50 text-white rounded-full text-sm sm:text-base md:text-lg font-light border border-white hover:bg-gray-900 hover:border-gray-300 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95 backdrop-blur-sm"
-              style={{ fontFamily: '"Cinzel Decorative", serif' }}
+              className="px-8 py-4 sm:px-10 sm:py-5 md:px-12 md:py-6 bg-orange-600 text-white rounded-full text-lg sm:text-xl md:text-2xl font-bold hover:bg-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 border-4 border-orange-600 hover:border-orange-700 flex items-center justify-center space-x-3 sm:space-x-4 md:space-x-5 min-w-[280px] sm:min-w-[350px] md:min-w-[400px]"
+              style={{ fontFamily: '"Arial", sans-serif' }}
             >
-              <span className="flex items-center justify-center">
-                <Utensils className="inline-block mr-1.5 sm:mr-2 w-4 h-4 sm:w-5 sm:h-5" />
-                <span
-                  style={{
-                    fontFamily: '"Cinzel Decorative", serif',
-                    letterSpacing: "0.5px",
-                  }}
-                >
-                  Explore Our Menu
-                </span>
+              <Utensils className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
+              <span className="font-bold tracking-wide">
+                EXPLORE OUR MENU
               </span>
             </button>
           </div>
 
-          {/* 5 Star Review Button */}
+          {/* Google Review Section */}
           <div 
-            className={`transition-opacity duration-500 ${
+            className={`transition-opacity duration-500 flex flex-col items-center space-y-4 ${
               buttonsLoaded ? 'opacity-100' : 'opacity-0'
             }`}
-            style={{ transitionDelay: '300ms' }}
+            style={{ transitionDelay: '600ms' }}
           >
-            <button
+            <div 
               onClick={() => window.open("https://www.google.com/search?sca_esv=bbe24cb31649d4ed&sxsrf=AE3TifNB0rxkCBcfMPZUq4Cl7B1cbNiwbg:1755185663524&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E5hjw2IezP_Bw3k_5rJeegZLUiDytyxIWp-4-ROn9bNJsQIZRow8EYRYRoeYE65h-v896ClcNr_EJ9DJAT8e-F7HGNkWdkTzWU8S7X92urJefrzAzQ%3D%3D&q=Ming%27s+Chinese+Cuisine+Reviews&sa=X&ved=2ahUKEwie2PSP0IqPAxUBRmcHHfPGIx0Q0bkNegQIPRAD&biw=1470&bih=832&dpr=2", "_blank")}
-              className="px-3 py-2 sm:px-4 sm:py-2.5 md:px-5 md:py-3 bg-black bg-opacity-50 text-white rounded-full text-sm sm:text-base md:text-lg font-light border border-white hover:bg-gray-900 hover:border-gray-300 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95 backdrop-blur-sm"
-              style={{ fontFamily: '"Cinzel Decorative", serif' }}
+              className="cursor-pointer text-center"
             >
-              <div className="flex flex-col items-center justify-center space-y-1 sm:space-y-1.5">
-                <span style={{ 
-                  fontFamily: '"Cinzel Decorative", serif', 
-                  letterSpacing: "0.5px" 
-                }}>
-                  Review Us & Rate Us
-                </span>
-                <div className="flex space-x-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star 
-                      key={i} 
-                      className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-yellow-400 fill-yellow-400"
-                    />
-                  ))}
-                </div>
+              <p className="text-orange-500 text-lg sm:text-xl md:text-2xl font-semibold mb-4 tracking-wide">
+                Click to Rate us on Google
+              </p>
+              <div className="flex space-x-2 sm:space-x-3 justify-center">
+                {[...Array(5)].map((_, i) => (
+                  <Star 
+                    key={i} 
+                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-orange-500 fill-orange-500 hover:scale-110 transition-transform duration-200"
+                  />
+                ))}
               </div>
-            </button>
+            </div>
           </div>
         </div>
       </div>
