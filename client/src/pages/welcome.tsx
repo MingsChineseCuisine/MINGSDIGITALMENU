@@ -115,7 +115,7 @@ export default function Welcome() {
           className="flex flex-col items-center justify-center h-full transition-all duration-300"
           style={{ 
             gap: `${16 * buttonScale}px`,
-            transform: `translateY(-${Math.min(44, 44 * buttonScale)}px)`
+            transform: `translateY(-${Math.min(80, 80 * buttonScale)}px)`
           }}
         >
           {/* Social Media Buttons */}
