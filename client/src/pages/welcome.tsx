@@ -583,7 +583,7 @@ export default function Welcome() {
   }, []);
 
   return (
-    <div className="h-screen w-screen overflow-hidden relative bg-black">
+    <div className="h-screen w-screen overflow-hidden relative bg-white">
       {/* Media preloader */}
       <MediaPreloader onComplete={() => setMediaReady(true)} />
       
