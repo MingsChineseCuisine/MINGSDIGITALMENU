@@ -662,9 +662,17 @@ export default function Menu() {
                   backgroundColor: "white",
                 }}
               >
-                {/* Image placeholder space */}
-                <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center mb-1 sm:mb-2">
-                  <span className="text-gray-400 text-xs sm:text-sm">📷</span>
+                {/* Image space */}
+                <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center mb-1 sm:mb-2 overflow-hidden">
+                  {(category.id === "noodle" || category.id === "noodlewithgravy") ? (
+                    <img 
+                      src="/images/noodles.png" 
+                      alt="Noodles"
+                      className="w-full h-full object-cover rounded-md"
+                    />
+                  ) : (
+                    <span className="text-gray-400 text-xs sm:text-sm">📷</span>
+                  )}
                 </div>
                 {/* Category name */}
                 <span className="text-center leading-tight">
