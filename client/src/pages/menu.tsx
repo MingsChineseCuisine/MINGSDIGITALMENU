@@ -679,7 +679,7 @@ export default function Menu() {
                         'rice': '/images/rice.png',
                         'ricewithgravy': '/images/Rice with gravy.png',
                         'noodle': '/images/noodles.png',
-                        'noodlewithgravy': '/images/noodles.png',
+                        'noodlewithgravy': '/images/Noodle with gravy.png',
                         'thai': '/images/thai-food.png',
                         'chopsuey': '/images/Chop suey.png',
                         'desserts': '/images/dessert.png',
