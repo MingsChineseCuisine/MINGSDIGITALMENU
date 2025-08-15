@@ -649,17 +649,13 @@ export default function Menu() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex-shrink-0"
             >
-              <Button
-                variant="outline"
+              <div
                 onClick={() => handleCategoryChange(category.id)}
-                className={`bg-white font-serif font-bold transition-all duration-300 px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm md:text-base text-black hover:scale-102 whitespace-nowrap flex flex-col items-center justify-center space-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] ${activeCategory === category.id ? "shadow-lg scale-105" : ""
+                className={`font-serif font-bold transition-all duration-300 px-2 sm:px-3 md:px-4 py-3 sm:py-4 text-xs sm:text-sm md:text-base text-black hover:scale-102 whitespace-nowrap flex flex-col items-center justify-center space-y-2 min-h-[140px] sm:min-h-[160px] md:min-h-[180px] cursor-pointer ${activeCategory === category.id ? "scale-105" : ""
                   }`}
-                style={{
-                  backgroundColor: "white",
-                }}
               >
                 {/* Image space */}
-                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-lg flex items-center justify-center mb-2 sm:mb-3 overflow-hidden">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-lg flex items-center justify-center mb-2 sm:mb-3 overflow-hidden">
                   {(() => {
                     const getImageForCategory = (categoryId: string) => {
                       const imageMap: Record<string, string> = {
@@ -701,7 +697,7 @@ export default function Menu() {
                 <span className="text-center leading-tight">
                   {category.displayLabel}
                 </span>
-              </Button>
+              </div>
             </motion.div>
           ))}
         </div>
