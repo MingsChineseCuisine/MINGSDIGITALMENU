@@ -652,13 +652,9 @@ export default function Menu() {
               <Button
                 variant="outline"
                 onClick={() => handleCategoryChange(category.id)}
-                className={`bg-white border-2 font-serif font-bold transition-all duration-300 px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm md:text-base text-black hover:scale-102 whitespace-nowrap flex flex-col items-center justify-center space-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] ${activeCategory === category.id ? "shadow-lg scale-105" : ""
+                className={`bg-white font-serif font-bold transition-all duration-300 px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm md:text-base text-black hover:scale-102 whitespace-nowrap flex flex-col items-center justify-center space-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] ${activeCategory === category.id ? "shadow-lg scale-105" : ""
                   }`}
                 style={{
-                  borderColor:
-                    activeCategory === category.id
-                      ? "var(--elegant-gold)"
-                      : "var(--elegant-light-gray)",
                   backgroundColor: "white",
                 }}
               >
