@@ -652,7 +652,7 @@ export default function Menu() {
               <Button
                 variant="outline"
                 onClick={() => handleCategoryChange(category.id)}
-                className={`bg-white border-2 font-serif font-bold transition-all duration-300 px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm md:text-base text-black hover:scale-102 whitespace-nowrap flex flex-col items-center justify-center space-y-2 min-h-[80px] sm:min-h-[90px] md:min-h-[100px] ${activeCategory === category.id ? "shadow-lg scale-105" : ""
+                className={`bg-white border-2 font-serif font-bold transition-all duration-300 px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm md:text-base text-black hover:scale-102 whitespace-nowrap flex flex-col items-center justify-center space-y-2 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] ${activeCategory === category.id ? "shadow-lg scale-105" : ""
                   }`}
                 style={{
                   borderColor:
@@ -663,15 +663,15 @@ export default function Menu() {
                 }}
               >
                 {/* Image space */}
-                <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center mb-1 sm:mb-2 overflow-hidden">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-lg bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center mb-2 sm:mb-3 overflow-hidden">
                   {(category.id === "noodle" || category.id === "noodlewithgravy") ? (
                     <img 
                       src="/images/noodles.png" 
                       alt="Noodles"
-                      className="w-full h-full object-cover rounded-md"
+                      className="w-full h-full object-contain rounded-md"
                     />
                   ) : (
-                    <span className="text-gray-400 text-xs sm:text-sm">📷</span>
+                    <span className="text-gray-400 text-lg sm:text-xl md:text-2xl">📷</span>
                   )}
                 </div>
                 {/* Category name */}
