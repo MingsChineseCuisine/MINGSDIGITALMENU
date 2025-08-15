@@ -687,6 +687,31 @@ export default function Menu() {
                         src={imageSrc}
                         alt={category.displayLabel}
                         className="w-full h-full object-contain rounded-md"
+                        loading="lazy"
+                        decoding="async"
+                        style={{
+                          imageRendering: 'auto',
+                          maxWidth: '100%',
+                          height: 'auto',
+                          compress: 'true'
+                        }}
+                        onLoad={(e) => {
+                          // Compress image after load by creating smaller canvas version
+                          const img = e.target as HTMLImageElement;
+                          const canvas = document.createElement('canvas');
+                          const ctx = canvas.getContext('2d');
+                          if (ctx && img.naturalWidth > 200) {
+                            // Only compress if image is larger than 200px
+                            const ratio = Math.min(200 / img.naturalWidth, 200 / img.naturalHeight);
+                            canvas.width = img.naturalWidth * ratio;
+                            canvas.height = img.naturalHeight * ratio;
+                            ctx.imageSmoothingEnabled = true;
+                            ctx.imageSmoothingQuality = 'high';
+                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                            const compressedSrc = canvas.toDataURL('image/webp', 0.8);
+                            img.src = compressedSrc;
+                          }
+                        }}
                       />
                     ) : (
                       <span className="text-gray-400 text-lg sm:text-xl md:text-2xl">📷</span>
