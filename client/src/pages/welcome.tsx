@@ -564,7 +564,6 @@
 
 import { Utensils, Instagram, Facebook, Youtube, Star } from "lucide-react";
 import { useLocation } from "wouter";
-import FloatingParticles from "../components/floating-particles";
 import { useWelcomeAudio } from "../hooks/useWelcomeAudio";
 import { MediaPreloader } from "../components/media-preloader";
 import { useState, useEffect } from "react";
@@ -588,10 +587,7 @@ export default function Welcome() {
       {/* Media preloader */}
       <MediaPreloader onComplete={() => setMediaReady(true)} />
       
-      {/* Animated background for empty spaces */}
-      <div className="absolute inset-0 z-0">
-        <FloatingParticles />
-      </div>
+
 
       {/* Video background with multiple sources for deployment compatibility */}
       <video
@@ -631,7 +627,7 @@ export default function Welcome() {
 
       {/* Content container */}
       <div className="relative z-20 h-full w-full flex items-center justify-center px-4">
-        <div className="flex flex-col items-center justify-center h-full space-y-3 sm:space-y-4 md:space-y-5 -mt-16 sm:-mt-20 md:-mt-24">
+        <div className="flex flex-col items-center justify-center h-full space-y-3 sm:space-y-4 md:space-y-5 -mt-32 sm:-mt-36 md:-mt-40">
           {/* Social Media Buttons */}
           <div 
             className={`flex space-x-3 sm:space-x-4 md:space-x-5 transition-opacity duration-500 ${
