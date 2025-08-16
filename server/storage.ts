@@ -162,7 +162,8 @@ export class MongoStorage implements IStorage {
         allMenuItems.push(...items);
       }
 
-      return allMenuItems;
+      // Apply custom sorting: Veg items first, then Chicken, then Prawns, then others
+      return this.sortMenuItems(allMenuItems);
     } catch (error) {
       console.error("Error getting menu items:", error);
       return [];
@@ -178,7 +179,8 @@ export class MongoStorage implements IStorage {
       }
 
       const menuItems = await collection.find({}).toArray();
-      return menuItems;
+      // Apply custom sorting: Veg items first, then Chicken, then Prawns, then others
+      return this.sortMenuItems(menuItems);
     } catch (error) {
       console.error("Error getting menu items by category:", error);
       return [];
@@ -294,6 +296,31 @@ export class MongoStorage implements IStorage {
       console.error("Error clearing cart:", error);
       throw error;
     }
+  }
+
+  private sortMenuItems(items: MenuItem[]): MenuItem[] {
+    return items.sort((a, b) => {
+      const aName = a.name.toLowerCase();
+      const bName = b.name.toLowerCase();
+      
+      // Define sort order: Veg = 1, Chicken = 2, Prawns = 3, Others = 4
+      const getSortOrder = (name: string): number => {
+        if (name.startsWith('veg')) return 1;
+        if (name.startsWith('chicken')) return 2;
+        if (name.startsWith('prawns') || name.startsWith('prawn')) return 3;
+        return 4;
+      };
+      
+      const aOrder = getSortOrder(aName);
+      const bOrder = getSortOrder(bName);
+      
+      // If same sort order, sort alphabetically
+      if (aOrder === bOrder) {
+        return aName.localeCompare(bName);
+      }
+      
+      return aOrder - bOrder;
+    });
   }
 }
 
