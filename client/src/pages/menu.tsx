@@ -289,8 +289,7 @@ export default function Menu() {
     >
       {/* Header */}
       <header
-        className="sticky top-0 z-30 bg-white border-b elegant-shadow"
-        style={{ borderColor: "var(--elegant-light-gray)" }}
+        className="sticky top-0 z-30 bg-white elegant-shadow"
       >
         <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between">
@@ -311,7 +310,7 @@ export default function Menu() {
               <img
                 src="/images/logo.png"
                 alt="Restaurant Logo"
-                className="h-8 sm:h-10 md:h-12 w-auto object-contain"
+                className="h-12 sm:h-14 md:h-16 lg:h-18 w-auto object-contain"
               />
             </div>
 
