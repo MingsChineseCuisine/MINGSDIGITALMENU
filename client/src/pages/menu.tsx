@@ -57,27 +57,27 @@ interface SpeechRecognitionConstructor {
 const promotionalImages = [
   {
     id: 1,
-    src: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=240&h=160&fit=crop",
+    src: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb",
     alt: "Pastry Dishes on Plates",
   },
   {
     id: 2,
-    src: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=240&h=160&fit=crop",
+    src: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb",
     alt: "Empty Bar with Lights",
   },
   {
     id: 3,
-    src: "https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb&w=240&h=160&fit=crop",
+    src: "https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb",
     alt: "Clear Wine Glass on Table",
   },
   {
     id: 4,
-    src: "https://images.pexels.com/photos/1055058/pexels-photo-1055058.jpeg?auto=compress&cs=tinysrgb&w=240&h=160&fit=crop",
+    src: "https://images.pexels.com/photos/1055058/pexels-photo-1055058.jpeg?auto=compress&cs=tinysrgb",
     alt: "Brown Wooden Table",
   },
   {
     id: 5,
-    src: "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=240&h=160&fit=crop",
+    src: "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb",
     alt: "Traditional Chinese Cuisine",
   },
 ];
@@ -347,7 +347,10 @@ export default function Menu() {
               <div className="flex items-center justify-between mb-4 sm:mb-6">
                 <h2
                   className="text-lg sm:text-xl md:text-2xl font-bold"
-                  style={{ color: "var(--elegant-gold)", fontFamily: 'Open Sans, sans-serif' }}
+                  style={{
+                    color: "var(--elegant-gold)",
+                    fontFamily: "Open Sans, sans-serif",
+                  }}
                 >
                   Menu Categories
                 </h2>
@@ -383,7 +386,7 @@ export default function Menu() {
                         activeCategory === category.id
                           ? "var(--elegant-gold)"
                           : "var(--elegant-black)",
-                      fontFamily: 'Open Sans, sans-serif'
+                      fontFamily: "Open Sans, sans-serif",
                     }}
                   >
                     {category.displayLabel}
@@ -395,7 +398,10 @@ export default function Menu() {
               <div className="bg-gray-50 rounded-lg p-4 sm:p-6">
                 <h3
                   className="text-lg sm:text-xl font-bold mb-3 sm:mb-4"
-                  style={{ color: "var(--elegant-gold)", fontFamily: 'Open Sans, sans-serif' }}
+                  style={{
+                    color: "var(--elegant-gold)",
+                    fontFamily: "Open Sans, sans-serif",
+                  }}
                 >
                   Restaurant Information
                 </h3>
@@ -403,21 +409,35 @@ export default function Menu() {
                   <div className="flex items-center space-x-3">
                     <MapPin className="h-5 w-5 text-gray-600" />
                     <div>
-                      <p className="font-semibold text-gray-800" style={{ fontFamily: 'Open Sans, sans-serif' }}>
+                      <p
+                        className="font-semibold text-gray-800"
+                        style={{ fontFamily: "Open Sans, sans-serif" }}
+                      >
                         Mings Chinese Cuisine
                       </p>
-                      <p className="text-sm text-gray-600" style={{ fontFamily: 'Open Sans, sans-serif' }}>
-                        Shop no 2&3, ganga godavari apartment, katemanivali naka, Prabhuram Nagar, Kalyan East, Thane, Kalyan, Maharashtra 421306
+                      <p
+                        className="text-sm text-gray-600"
+                        style={{ fontFamily: "Open Sans, sans-serif" }}
+                      >
+                        Shop no 2&3, ganga godavari apartment, katemanivali
+                        naka, Prabhuram Nagar, Kalyan East, Thane, Kalyan,
+                        Maharashtra 421306
                       </p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Phone className="h-5 w-5 text-gray-600" />
                     <div>
-                      <p className="font-semibold text-gray-800" style={{ fontFamily: 'Open Sans, sans-serif' }}>
+                      <p
+                        className="font-semibold text-gray-800"
+                        style={{ fontFamily: "Open Sans, sans-serif" }}
+                      >
                         07506969333
                       </p>
-                      <p className="text-sm text-gray-600" style={{ fontFamily: 'Open Sans, sans-serif' }}>
+                      <p
+                        className="text-sm text-gray-600"
+                        style={{ fontFamily: "Open Sans, sans-serif" }}
+                      >
                         For reservations & orders
                       </p>
                     </div>
@@ -425,10 +445,18 @@ export default function Menu() {
                   <div className="flex items-center space-x-3">
                     <Clock className="h-5 w-5 text-gray-600" />
                     <div>
-                      <p className="font-semibold text-gray-800" style={{ fontFamily: 'Open Sans, sans-serif' }}>
+                      <p
+                        className="font-semibold text-gray-800"
+                        style={{ fontFamily: "Open Sans, sans-serif" }}
+                      >
                         11:00 AM - 11:00 PM
                       </p>
-                      <p className="text-sm text-gray-600" style={{ fontFamily: 'Open Sans, sans-serif' }}>Open all days</p>
+                      <p
+                        className="text-sm text-gray-600"
+                        style={{ fontFamily: "Open Sans, sans-serif" }}
+                      >
+                        Open all days
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -443,11 +471,14 @@ export default function Menu() {
                           )
                         }
                         className="font-semibold text-blue-600 hover:underline"
-                        style={{ fontFamily: 'Open Sans, sans-serif' }}
+                        style={{ fontFamily: "Open Sans, sans-serif" }}
                       >
                         @mingschinesecuisine
                       </button>
-                      <p className="text-sm text-gray-600" style={{ fontFamily: 'Open Sans, sans-serif' }}>
+                      <p
+                        className="text-sm text-gray-600"
+                        style={{ fontFamily: "Open Sans, sans-serif" }}
+                      >
                         Follow us for updates
                       </p>
                     </div>
