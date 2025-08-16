@@ -53,56 +53,75 @@ interface SpeechRecognitionConstructor {
   new (): SpeechRecognition;
 }
 
-
 // Promotional images for the carousel - Updated with new images without tint/overlay
 const promotionalImages = [
   {
     id: 1,
     src: "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=800&h=200&fit=crop",
-    alt: "Delicious Chinese Cuisine"
+    alt: "Delicious Chinese Cuisine",
   },
   {
     id: 2,
     src: "https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?auto=compress&cs=tinysrgb&w=800&h=200&fit=crop",
-    alt: "Elegant Dining Experience"
+    alt: "Elegant Dining Experience",
   },
   {
     id: 3,
     src: "https://images.pexels.com/photos/3184192/pexels-photo-3184192.jpeg?auto=compress&cs=tinysrgb&w=800&h=200&fit=crop",
-    alt: "Fresh Beverages"
+    alt: "Fresh Beverages",
   },
   {
     id: 4,
     src: "https://images.pexels.com/photos/1059943/pexels-photo-1059943.jpeg?auto=compress&cs=tinysrgb&w=800&h=200&fit=crop",
-    alt: "Authentic Chinese Fritters"
+    alt: "Authentic Chinese Fritters",
   },
   {
     id: 5,
     src: "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=800&h=200&fit=crop",
-    alt: "Traditional Chinese Cuisine"
-  }
+    alt: "Traditional Chinese Cuisine",
+  },
 ];
 
 // Now each category has both a display label and the actual MongoDB category name
 const categories = [
   { id: "soups", displayLabel: "Soups", dbCategory: "soups" },
   { id: "vegstarter", displayLabel: "Veg Starter", dbCategory: "vegstarter" },
-  { id: "chickenstarter", displayLabel: "Chicken Starter", dbCategory: "chickenstarter" },
-  { id: "prawnsstarter", displayLabel: "Prawns Starter", dbCategory: "prawnsstarter" },
+  {
+    id: "chickenstarter",
+    displayLabel: "Chicken Starter",
+    dbCategory: "chickenstarter",
+  },
+  {
+    id: "prawnsstarter",
+    displayLabel: "Prawns Starter",
+    dbCategory: "prawnsstarter",
+  },
   { id: "seafood", displayLabel: "Sea Food", dbCategory: "seafood" },
-  { id: "springrolls", displayLabel: "Spring Rolls", dbCategory: "springrolls" },
+  {
+    id: "springrolls",
+    displayLabel: "Spring Rolls",
+    dbCategory: "springrolls",
+  },
   { id: "momos", displayLabel: "Momos", dbCategory: "momos" },
   { id: "gravies", displayLabel: "Gravies", dbCategory: "gravies" },
   { id: "potrice", displayLabel: "Pot Rice", dbCategory: "potrice" },
   { id: "rice", displayLabel: "Rice", dbCategory: "rice" },
-  { id: "ricewithgravy", displayLabel: "Rice with Gravy", dbCategory: "ricewithgravy" },
+  {
+    id: "ricewithgravy",
+    displayLabel: "Rice with Gravy",
+    dbCategory: "ricewithgravy",
+  },
   { id: "noodle", displayLabel: "Noodle", dbCategory: "noodle" },
-  { id: "noodlewithgravy", displayLabel: "Noodle with Gravy", dbCategory: "noodlewithgravy" },
+  {
+    id: "noodlewithgravy",
+    displayLabel: "Noodle with Gravy",
+    dbCategory: "noodlewithgravy",
+  },
   { id: "thai", displayLabel: "Thai", dbCategory: "thai" },
   { id: "chopsuey", displayLabel: "Chop Suey", dbCategory: "chopsuey" },
   { id: "desserts", displayLabel: "Desserts", dbCategory: "desserts" },
   { id: "beverages", displayLabel: "Beverages", dbCategory: "beverages" },
-  { id: "extra", displayLabel: "Extra", dbCategory: "extra" }
+  { id: "extra", displayLabel: "Extra", dbCategory: "extra" },
 ];
 
 const filterTypes = [
@@ -131,45 +150,47 @@ export default function Menu() {
     queryKey: ["/api/cart"],
   });
 
-
   // Initialize Speech Recognition
   useEffect(() => {
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new SpeechRecognition();
-      
+
       recognition.continuous = false;
       recognition.interimResults = false;
-      recognition.lang = 'en-US';
-      
+      recognition.lang = "en-US";
+
       recognition.onstart = () => {
         setIsListening(true);
       };
-      
+
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
         setSearchQuery(transcript);
         setIsListening(false);
       };
-      
+
       recognition.onerror = (event) => {
-        console.error('Speech recognition error:', event.error);
+        console.error("Speech recognition error:", event.error);
         setIsListening(false);
-        
+
         // Show user-friendly error message
-        if (event.error === 'not-allowed') {
-          alert('Voice search permission denied. Please allow microphone access and try again.');
-        } else if (event.error === 'no-speech') {
-          alert('No speech detected. Please try speaking again.');
+        if (event.error === "not-allowed") {
+          alert(
+            "Voice search permission denied. Please allow microphone access and try again.",
+          );
+        } else if (event.error === "no-speech") {
+          alert("No speech detected. Please try speaking again.");
         } else {
-          alert('Voice search failed. Please try again or type your search.');
+          alert("Voice search failed. Please try again or type your search.");
         }
       };
-      
+
       recognition.onend = () => {
         setIsListening(false);
       };
-      
+
       setSpeechRecognition(recognition);
       setVoiceSearchSupported(true);
     } else {
@@ -183,11 +204,13 @@ export default function Menu() {
       try {
         speechRecognition.start();
       } catch (error) {
-        console.error('Error starting voice recognition:', error);
-        alert('Voice search failed to start. Please try again.');
+        console.error("Error starting voice recognition:", error);
+        alert("Voice search failed to start. Please try again.");
       }
     } else {
-      alert('Voice search is not supported in your browser. Please use Chrome or Safari for the best experience.');
+      alert(
+        "Voice search is not supported in your browser. Please use Chrome or Safari for the best experience.",
+      );
     }
   };
 
@@ -197,7 +220,6 @@ export default function Menu() {
       speechRecognition.stop();
     }
   };
-
 
   // Create a mapping from category IDs to MongoDB category names
   const categoryIdToDbCategory = categories.reduce(
@@ -230,7 +252,13 @@ export default function Menu() {
 
       return matchesCategory && matchesFilter && matchesSearch;
     });
-  }, [menuItems, activeCategory, filterType, searchQuery, categoryIdToDbCategory]);
+  }, [
+    menuItems,
+    activeCategory,
+    filterType,
+    searchQuery,
+    categoryIdToDbCategory,
+  ]);
 
   const cartItemCount = Array.isArray(cartItems) ? cartItems.length : 0;
 
@@ -239,14 +267,13 @@ export default function Menu() {
   // Auto-scroll carousel effect for images
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => 
-        (prevIndex + 1) % promotionalImages.length
+      setCurrentImageIndex(
+        (prevIndex) => (prevIndex + 1) % promotionalImages.length,
       );
     }, 4000); // Change image every 4 seconds
 
     return () => clearInterval(interval);
   }, []);
-
 
   // Clear search when category changes (if you want this behavior)
   const handleCategoryChange = (categoryId: string) => {
@@ -277,25 +304,19 @@ export default function Menu() {
               >
                 <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
               </Button>
-              <h1
-                className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold truncate"
-                style={{ color: "var(--elegant-gold)" }}
-              >
-                Mings Chinese Cuisine
-              </h1>
+            </div>
+
+            {/* Centered Logo */}
+            <div className="absolute left-1/2 transform -translate-x-1/2">
+              <img
+                src="/images/logo.png"
+                alt="Restaurant Logo"
+                className="h-8 sm:h-10 md:h-12 w-auto object-contain"
+              />
             </div>
 
             <div className="flex items-center space-x-1 sm:space-x-2 md:space-x-3 flex-shrink-0">
-              {/* Instagram Button */}
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => window.open("https://instagram.com/mingschinesecuisine", "_blank", "noopener,noreferrer")}
-                className="hover:bg-transparent"
-                style={{ color: "var(--elegant-gold)" }}
-              >
-                <FaInstagram className="h-5 w-5 sm:h-6 sm:w-6" />
-              </Button>
+              {/* Instagram Button was here we removed it*/}
 
               {/* Hamburger Menu Button */}
               <Button
@@ -327,7 +348,10 @@ export default function Menu() {
             <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6">
               {/* Header */}
               <div className="flex items-center justify-between mb-4 sm:mb-6">
-                <h2 className="font-serif text-lg sm:text-xl md:text-2xl font-bold" style={{ color: "var(--elegant-gold)" }}>
+                <h2
+                  className="font-serif text-lg sm:text-xl md:text-2xl font-bold"
+                  style={{ color: "var(--elegant-gold)" }}
+                >
                   Menu Categories
                 </h2>
                 <Button
@@ -357,8 +381,11 @@ export default function Menu() {
                         ? "border-yellow-400 bg-yellow-50"
                         : "border-gray-200 bg-white hover:border-yellow-300 hover:bg-yellow-25"
                     }`}
-                    style={{ 
-                      color: activeCategory === category.id ? "var(--elegant-gold)" : "var(--elegant-black)"
+                    style={{
+                      color:
+                        activeCategory === category.id
+                          ? "var(--elegant-gold)"
+                          : "var(--elegant-black)",
                     }}
                   >
                     {category.displayLabel}
@@ -368,29 +395,44 @@ export default function Menu() {
 
               {/* Restaurant Information */}
               <div className="bg-gray-50 rounded-lg p-4 sm:p-6">
-                <h3 className="font-serif text-lg sm:text-xl font-bold mb-3 sm:mb-4" style={{ color: "var(--elegant-gold)" }}>
+                <h3
+                  className="font-serif text-lg sm:text-xl font-bold mb-3 sm:mb-4"
+                  style={{ color: "var(--elegant-gold)" }}
+                >
                   Restaurant Information
                 </h3>
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <MapPin className="h-5 w-5 text-gray-600" />
                     <div>
-                      <p className="font-semibold text-gray-800">Mings Chinese Cuisine</p>
-                      <p className="text-sm text-gray-600">123 Golden Street, Royal District</p>
-                      <p className="text-sm text-gray-600">New Delhi - 110001</p>
+                      <p className="font-semibold text-gray-800">
+                        Mings Chinese Cuisine
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        123 Golden Street, Royal District
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        New Delhi - 110001
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Phone className="h-5 w-5 text-gray-600" />
                     <div>
-                      <p className="font-semibold text-gray-800">+91 98765 43210</p>
-                      <p className="text-sm text-gray-600">For reservations & orders</p>
+                      <p className="font-semibold text-gray-800">
+                        +91 98765 43210
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        For reservations & orders
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Clock className="h-5 w-5 text-gray-600" />
                     <div>
-                      <p className="font-semibold text-gray-800">11:00 AM - 11:00 PM</p>
+                      <p className="font-semibold text-gray-800">
+                        11:00 AM - 11:00 PM
+                      </p>
                       <p className="text-sm text-gray-600">Open all days</p>
                     </div>
                   </div>
@@ -398,12 +440,20 @@ export default function Menu() {
                     <FaInstagram className="h-5 w-5 text-gray-600" />
                     <div>
                       <button
-                        onClick={() => window.open("https://instagram.com/mingschinesecuisine", "_blank", "noopener,noreferrer")}
+                        onClick={() =>
+                          window.open(
+                            "https://instagram.com/mingschinesecuisine",
+                            "_blank",
+                            "noopener,noreferrer",
+                          )
+                        }
                         className="font-semibold text-blue-600 hover:underline"
                       >
                         @mingschinesecuisine
                       </button>
-                      <p className="text-sm text-gray-600">Follow us for updates</p>
+                      <p className="text-sm text-gray-600">
+                        Follow us for updates
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -439,11 +489,13 @@ export default function Menu() {
                     size="icon"
                     onClick={isListening ? stopVoiceSearch : startVoiceSearch}
                     className={`h-8 w-8 rounded-full transition-all duration-300 ${
-                      isListening 
-                        ? "bg-red-100 hover:bg-red-200 text-red-600" 
+                      isListening
+                        ? "bg-red-100 hover:bg-red-200 text-red-600"
                         : "bg-gray-100 hover:bg-gray-200 text-gray-600"
                     }`}
-                    title={isListening ? "Stop voice search" : "Start voice search"}
+                    title={
+                      isListening ? "Stop voice search" : "Start voice search"
+                    }
                   >
                     {isListening ? (
                       <motion.div
@@ -498,11 +550,13 @@ export default function Menu() {
                     size="icon"
                     onClick={isListening ? stopVoiceSearch : startVoiceSearch}
                     className={`h-10 w-10 rounded-full transition-all duration-300 ${
-                      isListening 
-                        ? "bg-red-100 hover:bg-red-200 text-red-600" 
+                      isListening
+                        ? "bg-red-100 hover:bg-red-200 text-red-600"
                         : "bg-gray-100 hover:bg-gray-200 text-gray-600"
                     }`}
-                    title={isListening ? "Stop voice search" : "Start voice search"}
+                    title={
+                      isListening ? "Stop voice search" : "Start voice search"
+                    }
                   >
                     {isListening ? (
                       <motion.div
@@ -540,7 +594,9 @@ export default function Menu() {
                       }}
                     />
                   )}
-                  <span className="hidden sm:inline">{currentFilter?.label}</span>
+                  <span className="hidden sm:inline">
+                    {currentFilter?.label}
+                  </span>
                   <ChevronDown
                     className={`h-3 w-3 sm:h-4 sm:w-4 text-gray-400 transition-transform duration-200 ${showFilterDropdown ? "rotate-180" : ""}`}
                   />
@@ -566,8 +622,9 @@ export default function Menu() {
                       setFilterType(type.id);
                       setShowFilterDropdown(false);
                     }}
-                    className={`w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3 font-serif font-semibold transition-all duration-200 ${filterType === type.id ? "bg-gray-100" : ""
-                      } ${index === 0 ? "rounded-t-2xl" : ""} ${index === filterTypes.length - 1 ? "rounded-b-2xl" : ""}`}
+                    className={`w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3 font-serif font-semibold transition-all duration-200 ${
+                      filterType === type.id ? "bg-gray-100" : ""
+                    } ${index === 0 ? "rounded-t-2xl" : ""} ${index === filterTypes.length - 1 ? "rounded-b-2xl" : ""}`}
                     style={{ color: "var(--elegant-black)" }}
                   >
                     {type.id !== "all" && (
@@ -619,7 +676,7 @@ export default function Menu() {
               </div>
             ))}
           </motion.div>
-          
+
           {/* Indicator dots */}
           <div className="absolute bottom-2 sm:bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-1 sm:space-x-2">
             {promotionalImages.map((_, index) => (
@@ -627,8 +684,8 @@ export default function Menu() {
                 key={index}
                 onClick={() => setCurrentImageIndex(index)}
                 className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ${
-                  index === currentImageIndex 
-                    ? "bg-white shadow-lg scale-125" 
+                  index === currentImageIndex
+                    ? "bg-white shadow-lg scale-125"
                     : "bg-white/50 hover:bg-white/75"
                 }`}
               />
@@ -636,7 +693,6 @@ export default function Menu() {
           </div>
         </div>
       </div>
-
 
       {/* Category Tabs */}
       <div className="container mx-auto px-3 sm:px-4 mb-6 sm:mb-8 md:mb-10">
@@ -651,70 +707,85 @@ export default function Menu() {
             >
               <div
                 onClick={() => handleCategoryChange(category.id)}
-                className={`font-serif font-bold transition-all duration-300 px-2 sm:px-3 md:px-4 py-3 sm:py-4 text-xs sm:text-sm md:text-base text-black hover:scale-102 whitespace-nowrap flex flex-col items-center justify-center space-y-2 min-h-[140px] sm:min-h-[160px] md:min-h-[180px] cursor-pointer ${activeCategory === category.id ? "scale-105" : ""
-                  }`}
+                className={`font-serif font-bold transition-all duration-300 px-2 sm:px-3 md:px-4 py-3 sm:py-4 text-xs sm:text-sm md:text-base text-black hover:scale-102 whitespace-nowrap flex flex-col items-center justify-center space-y-2 min-h-[140px] sm:min-h-[160px] md:min-h-[180px] cursor-pointer ${
+                  activeCategory === category.id ? "scale-105" : ""
+                }`}
               >
                 {/* Image space */}
                 <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-lg flex items-center justify-center mb-2 sm:mb-3 overflow-hidden">
                   {(() => {
                     const getImageForCategory = (categoryId: string) => {
                       const imageMap: Record<string, string> = {
-                        'soups': '/images/Soups.png',
-                        'vegstarter': '/images/Veg Starters.png',
-                        'chickenstarter': '/images/Chicken Starters.png',
-                        'prawnsstarter': '/images/Prawn Starters.png',
-                        'seafood': '/images/seafood.png',
-                        'springrolls': '/images/Spring rolls.png',
-                        'momos': '/images/momos.png',
-                        'gravies': '/images/gravies.png',
-                        'potrice': '/images/pot rice.png',
-                        'rice': '/images/rice.png',
-                        'ricewithgravy': '/images/Rice with gravy.png',
-                        'noodle': '/images/noodles.png',
-                        'noodlewithgravy': '/images/Noodle with gravy.png',
-                        'thai': '/images/thai-food.png',
-                        'chopsuey': '/images/Chop suey.png',
-                        'desserts': '/images/dessert.png',
-                        'beverages': '/images/Beavrages.png',
-                        'extra': '/images/Extra.png'
+                        soups: "/images/Soups.png",
+                        vegstarter: "/images/Veg Starters.png",
+                        chickenstarter: "/images/Chicken Starters.png",
+                        prawnsstarter: "/images/Prawn Starters.png",
+                        seafood: "/images/seafood.png",
+                        springrolls: "/images/Spring rolls.png",
+                        momos: "/images/momos.png",
+                        gravies: "/images/gravies.png",
+                        potrice: "/images/pot rice.png",
+                        rice: "/images/rice.png",
+                        ricewithgravy: "/images/Rice with gravy.png",
+                        noodle: "/images/noodles.png",
+                        noodlewithgravy: "/images/Noodle with gravy.png",
+                        thai: "/images/thai-food.png",
+                        chopsuey: "/images/Chop suey.png",
+                        desserts: "/images/dessert.png",
+                        beverages: "/images/Beavrages.png",
+                        extra: "/images/Extra.png",
                       };
                       return imageMap[categoryId];
                     };
-                    
+
                     const imageSrc = getImageForCategory(category.id);
                     return imageSrc ? (
-                      <img 
+                      <img
                         src={imageSrc}
                         alt={category.displayLabel}
                         className="w-full h-full object-contain rounded-md"
                         loading="lazy"
                         decoding="async"
                         style={{
-                          imageRendering: 'auto',
-                          maxWidth: '100%',
-                          height: 'auto',
-                          compress: 'true'
+                          imageRendering: "auto",
+                          maxWidth: "100%",
+                          height: "auto",
+                          compress: "true",
                         }}
                         onLoad={(e) => {
                           // Compress image after load by creating smaller canvas version
                           const img = e.target as HTMLImageElement;
-                          const canvas = document.createElement('canvas');
-                          const ctx = canvas.getContext('2d');
+                          const canvas = document.createElement("canvas");
+                          const ctx = canvas.getContext("2d");
                           if (ctx && img.naturalWidth > 200) {
                             // Only compress if image is larger than 200px
-                            const ratio = Math.min(200 / img.naturalWidth, 200 / img.naturalHeight);
+                            const ratio = Math.min(
+                              200 / img.naturalWidth,
+                              200 / img.naturalHeight,
+                            );
                             canvas.width = img.naturalWidth * ratio;
                             canvas.height = img.naturalHeight * ratio;
                             ctx.imageSmoothingEnabled = true;
-                            ctx.imageSmoothingQuality = 'high';
-                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                            const compressedSrc = canvas.toDataURL('image/webp', 0.8);
+                            ctx.imageSmoothingQuality = "high";
+                            ctx.drawImage(
+                              img,
+                              0,
+                              0,
+                              canvas.width,
+                              canvas.height,
+                            );
+                            const compressedSrc = canvas.toDataURL(
+                              "image/webp",
+                              0.8,
+                            );
                             img.src = compressedSrc;
                           }
                         }}
                       />
                     ) : (
-                      <span className="text-gray-400 text-lg sm:text-xl md:text-2xl">📷</span>
+                      <span className="text-gray-400 text-lg sm:text-xl md:text-2xl">
+                        📷
+                      </span>
                     );
                   })()}
                 </div>
