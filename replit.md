@@ -171,5 +171,6 @@ UI/UX Preference: Modern, authentic design with sophisticated animations and ora
 - ✅ **Typography Update**: Changed category names and menu item names to use Open Sans font while keeping descriptions unchanged (August 16, 2025)
 - ✅ **Hamburger Menu Font Update**: Applied Open Sans font to all hamburger menu text including "Menu Categories", category buttons, and "Restaurant Information" section (August 16, 2025)
 - ✅ **Restaurant Information Update**: Updated address to "Shop no 2&3, ganga godavari apartment, katemanivali naka, Prabhuram Nagar, Kalyan East, Thane, Kalyan, Maharashtra 421306" and phone number to "07506969333" (August 16, 2025)
+- ✅ **Enhanced Menu Sorting**: Updated sorting logic to prioritize vegetarian items before non-vegetarian items within each category for both Replit and Vercel deployments (August 16, 2025)
 
 The application follows a traditional client-server architecture with a clear separation between frontend and backend, unified by shared TypeScript schemas and a modern orange, black, and white brand theme throughout the user experience. Now supports both Replit and Vercel deployment strategies with integrated customer review system, one-click rating functionality, robust audio/video playback optimized for all deployment environments including mobile devices, and consistent menu item sorting across all platforms.

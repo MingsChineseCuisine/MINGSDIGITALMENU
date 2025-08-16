@@ -303,7 +303,12 @@ export class MongoStorage implements IStorage {
       const aName = a.name.toLowerCase();
       const bName = b.name.toLowerCase();
       
-      // Define sort order: Veg = 1, Chicken = 2, Prawns = 3, Others = 4
+      // First priority: Veg items before non-veg items
+      if (a.isVeg !== b.isVeg) {
+        return a.isVeg ? -1 : 1; // Veg items first
+      }
+      
+      // Second priority: Within same veg/non-veg category, sort by name type
       const getSortOrder = (name: string): number => {
         if (name.startsWith('veg')) return 1;
         if (name.startsWith('chicken')) return 2;
