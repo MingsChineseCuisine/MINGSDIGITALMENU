@@ -15,6 +15,31 @@ async function connectToDatabase() {
   return client.db("mingsdb");
 }
 
+function sortMenuItems(items) {
+  return items.sort((a, b) => {
+    const aName = a.name.toLowerCase();
+    const bName = b.name.toLowerCase();
+    
+    // Define sort order: Veg = 1, Chicken = 2, Prawns = 3, Others = 4
+    const getSortOrder = (name) => {
+      if (name.startsWith('veg')) return 1;
+      if (name.startsWith('chicken')) return 2;
+      if (name.startsWith('prawns') || name.startsWith('prawn')) return 3;
+      return 4;
+    };
+    
+    const aOrder = getSortOrder(aName);
+    const bOrder = getSortOrder(bName);
+    
+    // If same sort order, sort alphabetically
+    if (aOrder === bOrder) {
+      return aName.localeCompare(bName);
+    }
+    
+    return aOrder - bOrder;
+  });
+}
+
 export default async function handler(req, res) {
   // Add CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -70,7 +95,8 @@ export default async function handler(req, res) {
 
         const items = await database.collection(collectionName).find({}).toArray();
         console.log(`Found ${items.length} items in ${category} category`);
-        res.status(200).json(items);
+        const sortedItems = sortMenuItems(items);
+        res.status(200).json(sortedItems);
       } else {
         // Get all menu items from all category collections
         console.log('Fetching all menu items...');
@@ -109,7 +135,8 @@ export default async function handler(req, res) {
         }
 
         console.log(`Found ${allMenuItems.length} menu items across all categories`);
-        res.status(200).json(allMenuItems);
+        const sortedAllItems = sortMenuItems(allMenuItems);
+        res.status(200).json(sortedAllItems);
       }
     } else {
       res.status(405).json({ error: 'Method not allowed' });
