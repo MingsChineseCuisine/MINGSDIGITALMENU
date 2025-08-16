@@ -167,5 +167,7 @@ UI/UX Preference: Modern, authentic design with sophisticated animations and ora
 - ✅ **Replit Migration Completed**: Successfully migrated from Replit Agent to Replit environment with full functionality (August 16, 2025)
 - ✅ **Menu Sorting Implementation**: Added custom sorting logic for menu items across all categories - Veg items first, then Chicken, then Prawns, then others, applied to both Replit and Vercel deployments (August 16, 2025)
 - ✅ **Header Logo Update**: Replaced "Mings Chinese Cuisine" text with centered restaurant logo image in menu page header (August 16, 2025)
+- ✅ **Header Enhancement**: Increased logo size and removed black border line for cleaner appearance (August 16, 2025)
+- ✅ **Typography Update**: Changed category names and menu item names to use Open Sans font while keeping descriptions unchanged (August 16, 2025)
 
 The application follows a traditional client-server architecture with a clear separation between frontend and backend, unified by shared TypeScript schemas and a modern orange, black, and white brand theme throughout the user experience. Now supports both Replit and Vercel deployment strategies with integrated customer review system, one-click rating functionality, robust audio/video playback optimized for all deployment environments including mobile devices, and consistent menu item sorting across all platforms.

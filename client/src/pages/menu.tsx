@@ -789,7 +789,10 @@ export default function Menu() {
                   })()}
                 </div>
                 {/* Category name */}
-                <span className="text-center leading-tight">
+                <span 
+                  className="text-center leading-tight font-semibold"
+                  style={{ fontFamily: 'Open Sans, sans-serif' }}
+                >
                   {category.displayLabel}
                 </span>
               </div>

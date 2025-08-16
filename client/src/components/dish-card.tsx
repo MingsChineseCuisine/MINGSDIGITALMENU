@@ -30,8 +30,8 @@ export default function DishCard({ item }: DishCardProps) {
         <div className="p-2 md:p-3 flex-1 flex flex-col">
           <div className="flex-1 space-y-1">
             <h3
-              className="font-serif text-sm md:text-base font-bold leading-tight line-clamp-2"
-              style={{ color: 'var(--mings-orange)' }}
+              className="text-sm md:text-base font-bold leading-tight line-clamp-2"
+              style={{ color: 'var(--mings-orange)', fontFamily: 'Open Sans, sans-serif' }}
             >
               {item.name}
             </h3>
