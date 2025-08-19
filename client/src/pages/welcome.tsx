@@ -525,8 +525,8 @@ export default function Welcome() {
       </div>
 
       {/* Bottom Links Section */}
-      <div className="absolute bottom-0 left-0 right-0 z-30 pb-4 px-4">
-        <div className="flex flex-col items-center gap-2">
+      <div className="absolute bottom-0 left-0 right-0 z-30 pb-4 sm:pb-6 md:pb-8 px-4">
+        <div className="flex flex-col items-center space-y-4 sm:space-y-5 md:space-y-6">
           {/* Mings Chinese Cuisine Website Link */}
           <div
             className={`transition-opacity duration-500 ${
@@ -538,47 +538,53 @@ export default function Welcome() {
               href="https://mingschinesecuisine.in/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-orange-500 hover:text-orange-600 transition-all duration-300 font-medium text-sm sm:text-base hover:scale-105 transform active:scale-95"
+              className="text-orange-500 hover:text-orange-600 transition-all duration-300 font-medium hover:scale-105 transform active:scale-95 block text-center"
               style={{
                 fontFamily: '"DM Sans", sans-serif',
                 color: "#FF6B35",
-                fontSize: `${14 * buttonScale}px`,
+                fontSize: `${Math.max(16, 16 * buttonScale)}px`, // Minimum 16px, scaled up
                 textDecoration: 'underline',
-                textDecorationColor: '#FF6B35'
+                textDecorationColor: '#FF6B35',
+                fontWeight: '600',
+                letterSpacing: '0.5px'
               }}
             >
               www.mingschinesecuisine.in
             </a>
           </div>
 
-          {/* Airavata Technologies Credit */}
+          {/* Developed By Section */}
           <div
-            className={`transition-opacity duration-500 flex items-center gap-1 ${
+            className={`transition-opacity duration-500 flex flex-col items-center space-y-2 ${
               buttonsLoaded ? "opacity-100" : "opacity-0"
             }`}
             style={{ transitionDelay: "1400ms" }}
           >
             <span
-              className="text-black text-xs sm:text-sm"
+              className="text-black font-medium tracking-wide"
               style={{
                 fontFamily: '"DM Sans", sans-serif',
-                fontSize: `${12 * buttonScale}px`,
-                color: "#000000"
+                fontSize: `${Math.max(14, 14 * buttonScale)}px`, // Minimum 14px, scaled up
+                color: "#000000",
+                fontWeight: '500',
+                letterSpacing: '0.3px'
               }}
             >
-              made with love by
+              Developed By
             </span>
             <a
               href="https://airavatatechnologies.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-orange-500 hover:text-orange-600 transition-all duration-300 font-semibold text-xs sm:text-sm hover:scale-105 transform active:scale-95"
+              className="text-orange-500 hover:text-orange-600 transition-all duration-300 font-bold hover:scale-105 transform active:scale-95"
               style={{
                 fontFamily: '"DM Sans", sans-serif',
                 color: "#FF6B35",
-                fontSize: `${12 * buttonScale}px`,
+                fontSize: `${Math.max(15, 15 * buttonScale)}px`, // Minimum 15px, scaled up
                 textDecoration: 'underline',
-                textDecorationColor: '#FF6B35'
+                textDecorationColor: '#FF6B35',
+                fontWeight: '700',
+                letterSpacing: '0.8px'
               }}
             >
               AIRAVATA TECHNOLOGIES
