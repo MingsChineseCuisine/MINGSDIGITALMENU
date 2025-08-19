@@ -270,7 +270,7 @@ import { Utensils, Instagram, Facebook, Youtube, Star } from "lucide-react";
 import { useLocation } from "wouter";
 import { useWelcomeAudio } from "../hooks/useWelcomeAudio";
 import { MediaPreloader } from "../components/media-preloader";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 
 export default function Welcome() {
   const [, setLocation] = useLocation();
@@ -279,51 +279,79 @@ export default function Welcome() {
   const [buttonsLoaded, setButtonsLoaded] = useState(false);
   const [videoSize, setVideoSize] = useState({ width: 0, height: 0 });
   const [buttonScale, setButtonScale] = useState(1);
+  const [animationStage, setAnimationStage] = useState(0);
 
-  // Trigger button loading animation with dynamic scaling based on video size
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setButtonsLoaded(true);
-    }, 50); // Very small delay to allow CSS transition to work
-
-    // Function to calculate button scale based on video size
-    const calculateButtonScale = () => {
-      const videoElement = document.querySelector('video');
-      if (videoElement) {
-        const rect = videoElement.getBoundingClientRect();
-        const baseWidth = 428; // iPhone 14 Pro Max width as reference
-        const scale = Math.max(0.6, Math.min(1.4, rect.width / baseWidth));
-        setButtonScale(scale);
-        setVideoSize({ width: rect.width, height: rect.height });
-      }
-    };
-
-    // Calculate initial scale after a short delay to ensure video is loaded
-    setTimeout(calculateButtonScale, 500);
-
-    // Recalculate on resize
-    const handleResize = () => {
-      calculateButtonScale();
-    };
-
-    window.addEventListener('resize', handleResize);
-    
-    // Also listen for video metadata loaded to get accurate dimensions
+  // Optimized button scale calculation with useCallback
+  const calculateButtonScale = useCallback(() => {
     const videoElement = document.querySelector('video');
     if (videoElement) {
-      videoElement.addEventListener('loadedmetadata', calculateButtonScale);
-      videoElement.addEventListener('canplay', calculateButtonScale);
+      const rect = videoElement.getBoundingClientRect();
+      const baseWidth = 428; // iPhone 14 Pro Max width as reference
+      const scale = Math.max(0.6, Math.min(1.4, rect.width / baseWidth));
+      setButtonScale(scale);
+      setVideoSize({ width: rect.width, height: rect.height });
+    }
+  }, []);
+
+  // Optimized resize handler with throttling
+  const handleResize = useCallback(() => {
+    requestAnimationFrame(calculateButtonScale);
+  }, [calculateButtonScale]);
+
+  // Social media click handlers with proper focus management
+  const handleSocialClick = useCallback((url: string) => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) {
+      // Remove focus from button to prevent orange state persistence
+      (document.activeElement as HTMLElement)?.blur();
+    }
+  }, []);
+
+  // Staggered animation system
+  useEffect(() => {
+    const timers: NodeJS.Timeout[] = [];
+    
+    // Stage 0: Initial load (300ms)
+    timers.push(setTimeout(() => {
+      setAnimationStage(1);
+      setButtonsLoaded(true);
+    }, 300));
+
+    // Stage 1: Social buttons (600ms)
+    timers.push(setTimeout(() => setAnimationStage(2), 600));
+    
+    // Stage 2: Menu button (900ms)
+    timers.push(setTimeout(() => setAnimationStage(3), 900));
+    
+    // Stage 3: Rating section (1200ms)
+    timers.push(setTimeout(() => setAnimationStage(4), 1200));
+
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  // Video and scaling setup
+  useEffect(() => {
+    // Calculate initial scale after a short delay to ensure video is loaded
+    const scaleTimer = setTimeout(calculateButtonScale, 500);
+
+    // Add event listeners
+    window.addEventListener('resize', handleResize, { passive: true });
+    
+    const videoElement = document.querySelector('video');
+    if (videoElement) {
+      videoElement.addEventListener('loadedmetadata', calculateButtonScale, { passive: true });
+      videoElement.addEventListener('canplay', calculateButtonScale, { passive: true });
     }
 
     return () => {
-      clearTimeout(timer);
+      clearTimeout(scaleTimer);
       window.removeEventListener('resize', handleResize);
       if (videoElement) {
         videoElement.removeEventListener('loadedmetadata', calculateButtonScale);
         videoElement.removeEventListener('canplay', calculateButtonScale);
       }
     };
-  }, []);
+  }, [calculateButtonScale, handleResize]);
 
   return (
     <div className="h-screen w-screen overflow-hidden relative bg-white">
@@ -386,94 +414,113 @@ export default function Welcome() {
             transform: `translateY(-${60 * buttonScale}px)` // Moved buttons significantly upwards
           }}
         >
-          {/* Social Media Buttons */}
+          {/* Social Media Buttons with Staggered Animation */}
           <div
-            className={`flex transition-opacity duration-500 ${
-              buttonsLoaded ? "opacity-100" : "opacity-0"
+            className="flex"
+            style={{ gap: `${12 * buttonScale}px` }}
+          >
+            {[
+              { icon: Instagram, url: "https://instagram.com", delay: 300, radius: 12 },
+              { icon: Facebook, url: "https://facebook.com", delay: 450, radius: 12 },
+              { icon: Youtube, url: "https://youtube.com", delay: 600, radius: 24 }
+            ].map(({ icon: Icon, url, delay, radius }, index) => (
+              <button
+                key={index}
+                onClick={() => handleSocialClick(url)}
+                onMouseLeave={(e) => e.currentTarget.blur()} // Ensure no focus after mouse leave
+                className={`
+                  bg-transparent text-orange-500 
+                  hover:bg-orange-500 hover:text-white 
+                  focus:bg-orange-500 focus:text-white focus:outline-none
+                  transition-all duration-300 ease-out 
+                  shadow-lg hover:shadow-xl 
+                  transform hover:scale-110 active:scale-95
+                  flex items-center justify-center
+                  ${animationStage >= 1 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-90'}
+                `}
+                style={{ 
+                  border: `${2 * buttonScale}px solid #FF6B35`,
+                  color: "#FF6B35",
+                  width: `${48 * buttonScale}px`,
+                  height: `${48 * buttonScale}px`,
+                  borderRadius: `${radius * buttonScale}px`,
+                  transitionDelay: `${delay}ms`,
+                  transitionProperty: 'all, opacity, transform',
+                  willChange: 'transform',
+                  backfaceVisibility: 'hidden',
+                  WebkitBackfaceVisibility: 'hidden'
+                }}
+              >
+                <Icon 
+                  style={{ 
+                    width: `${20 * buttonScale}px`, 
+                    height: `${20 * buttonScale}px`,
+                    pointerEvents: 'none' // Prevent icon from interfering with button events
+                  }} 
+                />
+              </button>
+            ))}
+          </div>
+
+          {/* Explore Menu Button with Enhanced Animation */}
+          <div
+            className={`transition-all duration-700 ease-out ${
+              animationStage >= 2 ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-6 scale-95"
             }`}
             style={{ 
-              transitionDelay: "300ms",
-              gap: `${12 * buttonScale}px`
+              transitionDelay: "750ms",
+              willChange: 'transform'
             }}
           >
             <button
-              onClick={() => window.open("https://instagram.com", "_blank")}
-              className="bg-transparent text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
-              style={{ 
-                border: `${2 * buttonScale}px solid #FF6B35`,
-                color: "#FF6B35",
-                width: `${48 * buttonScale}px`,
-                height: `${48 * buttonScale}px`,
-                borderRadius: `${12 * buttonScale}px`
-              }}
-            >
-              <Instagram style={{ width: `${20 * buttonScale}px`, height: `${20 * buttonScale}px` }} />
-            </button>
-            <button
-              onClick={() => window.open("https://facebook.com", "_blank")}
-              className="bg-transparent text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
-              style={{ 
-                border: `${2 * buttonScale}px solid #FF6B35`,
-                color: "#FF6B35",
-                width: `${48 * buttonScale}px`,
-                height: `${48 * buttonScale}px`,
-                borderRadius: `${12 * buttonScale}px`
-              }}
-            >
-              <Facebook style={{ width: `${20 * buttonScale}px`, height: `${20 * buttonScale}px` }} />
-            </button>
-            <button
-              onClick={() => window.open("https://youtube.com", "_blank")}
-              className="bg-transparent text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
-              style={{ 
-                border: `${2 * buttonScale}px solid #FF6B35`,
-                color: "#FF6B35",
-                width: `${48 * buttonScale}px`,
-                height: `${48 * buttonScale}px`,
-                borderRadius: `${24 * buttonScale}px` // Fully rounded
-              }}
-            >
-              <Youtube style={{ width: `${20 * buttonScale}px`, height: `${20 * buttonScale}px` }} />
-            </button>
-          </div>
-
-          {/* Explore Menu Button - Made Larger */}
-          <div
-            className={`transition-opacity duration-500 ${
-              buttonsLoaded ? "opacity-100" : "opacity-0"
-            }`}
-            style={{ transitionDelay: "600ms" }}
-          >
-            <button
               onClick={() => setLocation("/menu")}
-              className="bg-white text-orange-500 font-bold hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 flex items-center justify-center"
+              onMouseLeave={(e) => e.currentTarget.blur()}
+              className="
+                bg-white text-orange-500 font-bold 
+                hover:bg-gray-50 hover:shadow-2xl 
+                focus:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500/20
+                transition-all duration-300 ease-out
+                shadow-lg transform hover:scale-110 active:scale-95 
+                flex items-center justify-center
+              "
               style={{
                 fontFamily: '"DM Sans", sans-serif',
                 borderColor: "#FF6B35",
                 color: "#FF6B35",
                 letterSpacing: "0.5px",
                 border: `${3 * buttonScale}px solid #FF6B35`,
-                borderRadius: `${28 * buttonScale}px`, // Increased border radius
-                padding: `${18 * buttonScale}px ${36 * buttonScale}px`, // Increased padding
-                gap: `${10 * buttonScale}px`, // Increased gap between icon and text
-                maxWidth: `${320 * buttonScale}px`, // Increased max width
-                height: `${56 * buttonScale}px`, // Increased height
-                fontSize: `${18 * buttonScale}px` // Increased font size
+                borderRadius: `${28 * buttonScale}px`,
+                padding: `${18 * buttonScale}px ${36 * buttonScale}px`,
+                gap: `${10 * buttonScale}px`,
+                maxWidth: `${320 * buttonScale}px`,
+                height: `${56 * buttonScale}px`,
+                fontSize: `${18 * buttonScale}px`,
+                willChange: 'transform',
+                backfaceVisibility: 'hidden',
+                WebkitBackfaceVisibility: 'hidden'
               }}
             >
-              <Utensils style={{ width: `${20 * buttonScale}px`, height: `${20 * buttonScale}px`, color: "#FF6B35" }} />
+              <Utensils 
+                style={{ 
+                  width: `${20 * buttonScale}px`, 
+                  height: `${20 * buttonScale}px`, 
+                  color: "#FF6B35",
+                  pointerEvents: 'none'
+                }} 
+              />
               <span className="font-bold">EXPLORE OUR MENU</span>
             </button>
           </div>
 
-          {/* Google Review Section - Made Larger */}
+          {/* Google Review Section with Enhanced Animation */}
           <div
-            className={`transition-opacity duration-500 flex flex-col items-center ${
-              buttonsLoaded ? "opacity-100" : "opacity-0"
+            className={`transition-all duration-700 ease-out flex flex-col items-center ${
+              animationStage >= 3 ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"
             }`}
             style={{ 
               transitionDelay: "900ms",
-              gap: `${12 * buttonScale}px` // Increased gap within the section
+              gap: `${12 * buttonScale}px`,
+              willChange: 'transform'
             }}
           >
             <div
@@ -483,38 +530,41 @@ export default function Welcome() {
                   "_blank",
                 )
               }
-              className="cursor-pointer text-center hover:opacity-80 transition-all duration-300 transform hover:scale-105 active:scale-95"
+              className="cursor-pointer text-center hover:opacity-90 transition-all duration-300 transform hover:scale-105 active:scale-95"
+              style={{ willChange: 'transform' }}
             >
               <p
                 className="text-orange-500 font-medium tracking-wide"
                 style={{
                   fontFamily: '"DM Sans", sans-serif',
                   color: "#FF6B35",
-                  fontSize: `${18 * buttonScale}px`, // Increased font size
-                  marginBottom: `${12 * buttonScale}px`, // Increased margin
-                  fontWeight: '600' // Made text bolder
+                  fontSize: `${18 * buttonScale}px`,
+                  marginBottom: `${12 * buttonScale}px`,
+                  fontWeight: '600'
                 }}
               >
                 Click to Rate us on Google
               </p>
               <div 
                 className="flex justify-center"
-                style={{ gap: `${6 * buttonScale}px` }} // Increased gap between stars
+                style={{ gap: `${6 * buttonScale}px` }}
               >
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className={`hover:scale-125 transition-all duration-200 ${
-                      buttonsLoaded ? "opacity-100" : "opacity-0"
+                    className={`hover:scale-125 transition-all duration-300 ease-out ${
+                      animationStage >= 4 ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-2 scale-80"
                     }`}
                     style={{ 
                       color: "#FF6B35", 
                       fill: "#FF6B35",
-                      width: `${32 * buttonScale}px`, // Increased star size
-                      height: `${32 * buttonScale}px`, // Increased star size
-                      filter: 'drop-shadow(0 2px 4px rgba(255, 107, 53, 0.3))', // Added shadow to stars
-                      transitionDelay: `${900 + (i * 150)}ms`, // Sequential appearance: 900ms, 1050ms, 1200ms, 1350ms, 1500ms
-                      transform: buttonsLoaded ? 'translateY(0) scale(1)' : 'translateY(10px) scale(0.8)', // Smooth entrance animation
+                      width: `${32 * buttonScale}px`,
+                      height: `${32 * buttonScale}px`,
+                      filter: 'drop-shadow(0 2px 4px rgba(255, 107, 53, 0.3))',
+                      transitionDelay: `${1200 + (i * 100)}ms`, // Faster sequential animation
+                      willChange: 'transform',
+                      backfaceVisibility: 'hidden',
+                      WebkitBackfaceVisibility: 'hidden'
                     }}
                   />
                 ))}
@@ -593,8 +643,20 @@ export default function Welcome() {
         </div>
       </div>
 
-      {/* Custom CSS animations - keeping minimal for fade-in only */}
+      {/* Optimized CSS animations */}
       <style>{`
+        /* Performance optimizations */
+        * {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Hardware acceleration for smooth animations */
+        button, .transition-all {
+          transform: translateZ(0);
+          -webkit-transform: translateZ(0);
+        }
+        
         /* Responsive adjustments for very small screens */
         @media (max-width: 320px) {
           .space-y-4 > :not([hidden]) ~ :not([hidden]) {
@@ -606,6 +668,15 @@ export default function Welcome() {
         @media (min-width: 640px) and (max-width: 1024px) {
           .space-y-6 > :not([hidden]) ~ :not([hidden]) {
             margin-top: 2rem;
+          }
+        }
+        
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+          * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
           }
         }
       `}</style>
