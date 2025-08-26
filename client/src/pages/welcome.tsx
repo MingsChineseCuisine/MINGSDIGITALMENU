@@ -22,60 +22,60 @@ export default function Welcome() {
       {/* Media preloader */}
       <MediaPreloader onComplete={() => setMediaReady(true)} />
 
-      {/* Mobile-sized background container */}
+      {/* Full height background container */}
       <div 
-        className="relative w-full max-w-sm mx-auto h-full max-h-[90vh] bg-cover bg-center bg-no-repeat"
+        className="relative w-full max-w-md mx-auto h-[95vh] bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url('/background.png')`,
           aspectRatio: '9/16',
         }}
       >
-        {/* Content directly on background - no card container */}
-        <div className="flex flex-col items-center justify-center h-full px-8 py-12 space-y-6">
+        {/* Content directly on background - scaled for full height */}
+        <div className="flex flex-col items-center justify-center h-full px-8 py-8 space-y-8">
           
           {/* Ming's Logo */}
           <div className="flex flex-col items-center w-full">
             <img 
               src="/images/logo.png" 
               alt="Ming's Chinese Cuisine"
-              className="w-52 h-auto"
+              className="w-64 h-auto"
             />
           </div>
 
           {/* Social Media Icons */}
-          <div className="flex space-x-4">
+          <div className="flex space-x-5">
             <button 
               onClick={() => handleSocialClick("https://instagram.com")}
-              className="w-12 h-12 border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
+              className="w-14 h-14 border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
             >
-              <Instagram className="w-5 h-5 text-orange-500" />
+              <Instagram className="w-6 h-6 text-orange-500" />
             </button>
             <button 
               onClick={() => handleSocialClick("https://facebook.com")}
-              className="w-12 h-12 border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
+              className="w-14 h-14 border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
             >
-              <Facebook className="w-5 h-5 text-orange-500" />
+              <Facebook className="w-6 h-6 text-orange-500" />
             </button>
             <button 
               onClick={() => handleSocialClick("https://youtube.com")}
-              className="w-12 h-12 border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
+              className="w-14 h-14 border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
             >
-              <Youtube className="w-5 h-5 text-orange-500" />
+              <Youtube className="w-6 h-6 text-orange-500" />
             </button>
           </div>
 
           {/* Explore Menu Button */}
           <button
             onClick={() => setLocation("/menu")}
-            className="bg-white text-orange-500 font-semibold px-8 py-3 border-2 border-orange-500 rounded-full hover:bg-orange-50 transition-colors flex items-center space-x-2 text-sm"
+            className="bg-white text-orange-500 font-semibold px-10 py-4 border-2 border-orange-500 rounded-full hover:bg-orange-50 transition-colors flex items-center space-x-3 text-base"
           >
-            <Utensils className="w-5 h-5" />
+            <Utensils className="w-6 h-6" />
             <span>EXPLORE OUR MENU</span>
           </button>
 
           {/* Rating Section */}
           <div className="text-center">
-            <p className="text-orange-500 font-medium mb-2 text-sm">Click to Rate us on Google</p>
+            <p className="text-orange-500 font-medium mb-3 text-base">Click to Rate us on Google</p>
             <div 
               className="flex justify-center space-x-1 cursor-pointer"
               onClick={() => window.open("https://www.google.com/search?sca_esv=bbe24cb31649d4ed&sxsrf=AE3TifNB0rxkCBcfMPZUq4Cl7B1cbNiwbg:1755185663524&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E5hjw2IezP_Bw3k_5rJeegZLUiDytyxIWp-4-ROn9bNJsQIZRow8EYRYRoeYE65h-v896ClcNr_EJ9DJAT8e-F7HGNkWdkTzWU8S7X92urJefrzAzQ%3D%3D&q=Ming%27s+Chinese+Cuisine+Reviews&sa=X&ved=2ahUKEwie2PSP0IqPAxUBRmcHHfPGIx0Q0bkNegQIPRAD&biw=1470&bih=832&dpr=2", "_blank")}
@@ -83,7 +83,7 @@ export default function Welcome() {
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star
                   key={star}
-                  className="w-6 h-6 text-orange-500 fill-orange-500"
+                  className="w-7 h-7 text-orange-500 fill-orange-500"
                 />
               ))}
             </div>
@@ -91,10 +91,10 @@ export default function Welcome() {
 
           {/* Address Section */}
           <div className="text-center">
-            <div className="bg-white px-4 py-2 rounded-full border-2 border-gray-600 mb-3">
-              <span className="text-gray-800 font-semibold text-sm">ADDRESS</span>
+            <div className="bg-white px-6 py-3 rounded-full border-2 border-gray-600 mb-4">
+              <span className="text-gray-800 font-semibold text-base">ADDRESS</span>
             </div>
-            <div className="text-gray-700 text-sm leading-tight">
+            <div className="text-gray-700 text-sm leading-relaxed">
               <p>SHOP NO 2&3, GANGA GODAVARI</p>
               <p>APARTMENT, KATEMANIVALI NAKA,</p>
               <p>PRABHURAM NAGAR, KALYAN EAST,</p>
@@ -105,8 +105,8 @@ export default function Welcome() {
 
           {/* Contact Section */}
           <div className="text-center">
-            <div className="bg-white px-4 py-2 rounded-full border-2 border-gray-600 mb-3">
-              <span className="text-gray-800 font-semibold text-sm">CONTACT</span>
+            <div className="bg-white px-6 py-3 rounded-full border-2 border-gray-600 mb-4">
+              <span className="text-gray-800 font-semibold text-base">CONTACT</span>
             </div>
             <div className="text-gray-700 text-sm space-y-1">
               <p>info@mingschinesecuisine.in</p>
