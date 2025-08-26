@@ -61,27 +61,17 @@ export default function Welcome() {
     return () => timers.forEach(clearTimeout);
   }, []);
 
-  // Video and scaling setup
+  // Background image and scaling setup
   useEffect(() => {
-    // Calculate initial scale after a short delay to ensure video is loaded
+    // Calculate initial scale after a short delay to ensure background is loaded
     const scaleTimer = setTimeout(calculateButtonScale, 500);
 
     // Add event listeners
     window.addEventListener('resize', handleResize, { passive: true });
-    
-    const videoElement = document.querySelector('video');
-    if (videoElement) {
-      videoElement.addEventListener('loadedmetadata', calculateButtonScale, { passive: true });
-      videoElement.addEventListener('canplay', calculateButtonScale, { passive: true });
-    }
 
     return () => {
       clearTimeout(scaleTimer);
       window.removeEventListener('resize', handleResize);
-      if (videoElement) {
-        videoElement.removeEventListener('loadedmetadata', calculateButtonScale);
-        videoElement.removeEventListener('canplay', calculateButtonScale);
-      }
     };
   }, [calculateButtonScale, handleResize]);
 
@@ -90,52 +80,13 @@ export default function Welcome() {
       {/* Media preloader */}
       <MediaPreloader onComplete={() => setMediaReady(true)} />
 
-      {/* Video background with multiple sources for deployment compatibility */}
-      <video
-        className="absolute inset-0 z-10 w-full h-full"
+      {/* Background image */}
+      <div 
+        className="absolute inset-0 z-10 w-full h-full bg-cover bg-center bg-no-repeat"
         style={{
-          objectFit: "contain", // Shows complete video with letterboxing if needed
+          backgroundImage: `url('/attached_assets/Mings final2532_1756189134501.png')`,
         }}
-        autoPlay
-        muted
-        playsInline
-        loop={false}
-        preload="auto"
-        onEnded={(e) => e.currentTarget.pause()}
-        onError={(e) => {
-          console.warn("Video source failed, trying next fallback");
-          // This will be handled by the browser automatically through source tags
-        }}
-        onLoadStart={() => console.log("Video loading started")}
-        onCanPlay={() => console.log("Video can play")}
-        onLoadedData={() => console.log("Video data loaded")}
-      >
-        {/* Multiple video sources for different deployment environments */}
-        <source src="/vedio/Black Elegant Wedding Menu.mp4" type="video/mp4" />
-        <source src="./vedio/Black Elegant Wedding Menu.mp4" type="video/mp4" />
-        <source
-          src="/assets/vedio/Black Elegant Wedding Menu.mp4"
-          type="video/mp4"
-        />
-        <source
-          src="./assets/vedio/Black Elegant Wedding Menu.mp4"
-          type="video/mp4"
-        />
-        {/* Fallback content for when video fails to load */}
-        <div className="absolute inset-0 bg-gradient-to-b from-orange-900 via-black to-orange-900 flex items-center justify-center">
-          <div className="text-white text-center">
-            <h2
-              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
-              style={{ fontFamily: '"Cinzel Decorative", serif' }}
-            >
-              Ming's Chinese Cuisine
-            </h2>
-            <p className="text-lg sm:text-xl opacity-80">
-              Loading Experience...
-            </p>
-          </div>
-        </div>
-      </video>
+      />
 
       {/* Content container */}
       <div className="relative z-20 h-full w-full flex items-center justify-center px-4">
