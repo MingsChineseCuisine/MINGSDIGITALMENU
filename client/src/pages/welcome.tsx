@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { useWelcomeAudio } from "../hooks/useWelcomeAudio";
 import { MediaPreloader } from "../components/media-preloader";
 import { useState, useEffect, useCallback } from "react";
+import backgroundImage from "/background.png";
 
 export default function Welcome() {
   const [, setLocation] = useLocation();
@@ -60,7 +61,7 @@ export default function Welcome() {
       <div 
         className="relative w-full mx-auto bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('/background.png')`,
+          backgroundImage: `url(${backgroundImage})`,
           maxWidth: `${Math.min(420 * scaleFactor, screenDimensions.width * 0.95)}px`,
           height: `${containerHeight}px`,
           aspectRatio: '9/16',

@@ -56,6 +56,15 @@
       }
     },
     {
+      "src": "/background.png",
+      "dest": "/background.png",
+      "headers": {
+        "Cache-Control": "public, max-age=86400",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "image/png"
+      }
+    },
+    {
       "src": "/assets/(.*)",
       "dest": "/assets/$1"
     },
