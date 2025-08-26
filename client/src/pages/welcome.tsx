@@ -18,20 +18,20 @@ export default function Welcome() {
       const height = window.innerHeight;
       setScreenDimensions({ width, height });
 
-      // Calculate scale factor based on screen size
-      // Base dimensions: 384px width (max-w-sm), 95vh height
-      const baseWidth = 384;
-      const baseHeight = height * 0.95;
+      // Calculate scale factor based on screen size for better screen utilization
+      // Base dimensions: 384px width, optimized for mobile screens
       
-      // For very small screens, scale down
+      // Scale up for better screen utilization while maintaining proportions
       if (height < 600) {
-        setScaleFactor(0.7);
+        setScaleFactor(0.85);
       } else if (height < 700) {
-        setScaleFactor(0.8);
+        setScaleFactor(1.0);
       } else if (height < 800) {
-        setScaleFactor(0.9);
+        setScaleFactor(1.1);
+      } else if (height < 900) {
+        setScaleFactor(1.2);
       } else {
-        setScaleFactor(1);
+        setScaleFactor(1.3);
       }
     };
 
@@ -48,8 +48,8 @@ export default function Welcome() {
     }
   }, []);
 
-  // Calculate responsive container height
-  const containerHeight = Math.min(screenDimensions.height * 0.95, screenDimensions.height - 40);
+  // Calculate responsive container height - use more screen space
+  const containerHeight = Math.min(screenDimensions.height * 0.98, screenDimensions.height - 20);
   
   return (
     <div className="h-screen w-screen overflow-hidden relative flex items-center justify-center" style={{ backgroundColor: '#FFF5F2' }}>
@@ -61,7 +61,7 @@ export default function Welcome() {
         className="relative w-full mx-auto bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url('/background.png')`,
-          maxWidth: `${Math.min(384 * scaleFactor, screenDimensions.width * 0.9)}px`,
+          maxWidth: `${Math.min(420 * scaleFactor, screenDimensions.width * 0.95)}px`,
           height: `${containerHeight}px`,
           aspectRatio: '9/16',
         }}
