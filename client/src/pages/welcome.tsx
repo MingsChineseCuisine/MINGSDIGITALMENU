@@ -158,7 +158,7 @@ export default function Welcome() {
           {/* Address Section */}
           <div className="text-center">
             <div 
-              className="bg-white rounded-full border-2 border-gray-600"
+              className="border-2 border-gray-600 rounded-full inline-block"
               style={{
                 padding: `${8 * scaleFactor}px ${24 * scaleFactor}px`,
                 marginBottom: `${12 * scaleFactor}px`,
@@ -186,7 +186,7 @@ export default function Welcome() {
           {/* Contact Section */}
           <div className="text-center">
             <div 
-              className="bg-white rounded-full border-2 border-gray-600"
+              className="border-2 border-gray-600 rounded-full inline-block"
               style={{
                 padding: `${8 * scaleFactor}px ${24 * scaleFactor}px`,
                 marginBottom: `${12 * scaleFactor}px`,
