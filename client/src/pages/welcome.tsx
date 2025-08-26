@@ -84,7 +84,7 @@ export default function Welcome() {
       <div 
         className="absolute inset-0 z-10 w-full h-full bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('/attached_assets/Mings final2532_1756189134501.png')`,
+          backgroundImage: `url('/attached_assets/Mings final2532_1756189570414.png')`,
         }}
       />
 
