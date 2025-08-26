@@ -8,6 +8,37 @@ export default function Welcome() {
   const [, setLocation] = useLocation();
   const { hasPlayedAudio, audioError, isReady } = useWelcomeAudio();
   const [mediaReady, setMediaReady] = useState(false);
+  const [screenDimensions, setScreenDimensions] = useState({ width: 0, height: 0 });
+  const [scaleFactor, setScaleFactor] = useState(1);
+
+  // Detect screen size and calculate scale factor
+  useEffect(() => {
+    const updateDimensions = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      setScreenDimensions({ width, height });
+
+      // Calculate scale factor based on screen size
+      // Base dimensions: 384px width (max-w-sm), 95vh height
+      const baseWidth = 384;
+      const baseHeight = height * 0.95;
+      
+      // For very small screens, scale down
+      if (height < 600) {
+        setScaleFactor(0.7);
+      } else if (height < 700) {
+        setScaleFactor(0.8);
+      } else if (height < 800) {
+        setScaleFactor(0.9);
+      } else {
+        setScaleFactor(1);
+      }
+    };
+
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
 
   // Social media click handlers
   const handleSocialClick = useCallback((url: string) => {
@@ -17,73 +48,108 @@ export default function Welcome() {
     }
   }, []);
 
+  // Calculate responsive container height
+  const containerHeight = Math.min(screenDimensions.height * 0.95, screenDimensions.height - 40);
+  
   return (
     <div className="h-screen w-screen overflow-hidden relative flex items-center justify-center" style={{ backgroundColor: '#FFF5F2' }}>
       {/* Media preloader */}
       <MediaPreloader onComplete={() => setMediaReady(true)} />
 
-      {/* Full height background container */}
+      {/* Responsive background container */}
       <div 
-        className="relative w-full max-w-md mx-auto h-[95vh] bg-cover bg-center bg-no-repeat"
+        className="relative w-full mx-auto bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url('/background.png')`,
+          maxWidth: `${Math.min(384 * scaleFactor, screenDimensions.width * 0.9)}px`,
+          height: `${containerHeight}px`,
           aspectRatio: '9/16',
         }}
       >
-        {/* Content directly on background - scaled for full height */}
-        <div className="flex flex-col items-center justify-center h-full px-8 py-8 space-y-8">
+        {/* Content directly on background - dynamically scaled */}
+        <div 
+          className="flex flex-col items-center justify-center h-full px-4"
+          style={{
+            padding: `${32 * scaleFactor}px ${16 * scaleFactor}px`,
+            gap: `${24 * scaleFactor}px`,
+          }}
+        >
           
           {/* Ming's Logo */}
           <div className="flex flex-col items-center w-full">
             <img 
               src="/images/logo.png" 
               alt="Ming's Chinese Cuisine"
-              className="w-64 h-auto"
+              style={{ width: `${240 * scaleFactor}px`, height: 'auto' }}
             />
           </div>
 
           {/* Social Media Icons */}
-          <div className="flex space-x-5">
+          <div className="flex" style={{ gap: `${16 * scaleFactor}px` }}>
             <button 
               onClick={() => handleSocialClick("https://instagram.com")}
-              className="w-14 h-14 border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
+              className="border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
+              style={{
+                width: `${48 * scaleFactor}px`,
+                height: `${48 * scaleFactor}px`,
+              }}
             >
-              <Instagram className="w-6 h-6 text-orange-500" />
+              <Instagram style={{ width: `${20 * scaleFactor}px`, height: `${20 * scaleFactor}px` }} className="text-orange-500" />
             </button>
             <button 
               onClick={() => handleSocialClick("https://facebook.com")}
-              className="w-14 h-14 border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
+              className="border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
+              style={{
+                width: `${48 * scaleFactor}px`,
+                height: `${48 * scaleFactor}px`,
+              }}
             >
-              <Facebook className="w-6 h-6 text-orange-500" />
+              <Facebook style={{ width: `${20 * scaleFactor}px`, height: `${20 * scaleFactor}px` }} className="text-orange-500" />
             </button>
             <button 
               onClick={() => handleSocialClick("https://youtube.com")}
-              className="w-14 h-14 border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
+              className="border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
+              style={{
+                width: `${48 * scaleFactor}px`,
+                height: `${48 * scaleFactor}px`,
+              }}
             >
-              <Youtube className="w-6 h-6 text-orange-500" />
+              <Youtube style={{ width: `${20 * scaleFactor}px`, height: `${20 * scaleFactor}px` }} className="text-orange-500" />
             </button>
           </div>
 
           {/* Explore Menu Button */}
           <button
             onClick={() => setLocation("/menu")}
-            className="bg-white text-orange-500 font-semibold px-10 py-4 border-2 border-orange-500 rounded-full hover:bg-orange-50 transition-colors flex items-center space-x-3 text-base"
+            className="bg-white text-orange-500 font-semibold border-2 border-orange-500 rounded-full hover:bg-orange-50 transition-colors flex items-center"
+            style={{
+              padding: `${12 * scaleFactor}px ${32 * scaleFactor}px`,
+              gap: `${8 * scaleFactor}px`,
+              fontSize: `${14 * scaleFactor}px`,
+            }}
           >
-            <Utensils className="w-6 h-6" />
+            <Utensils style={{ width: `${20 * scaleFactor}px`, height: `${20 * scaleFactor}px` }} />
             <span>EXPLORE OUR MENU</span>
           </button>
 
           {/* Rating Section */}
           <div className="text-center">
-            <p className="text-orange-500 font-medium mb-3 text-base">Click to Rate us on Google</p>
+            <p 
+              className="text-orange-500 font-medium mb-2"
+              style={{ fontSize: `${14 * scaleFactor}px`, marginBottom: `${8 * scaleFactor}px` }}
+            >
+              Click to Rate us on Google
+            </p>
             <div 
-              className="flex justify-center space-x-1 cursor-pointer"
+              className="flex justify-center cursor-pointer"
+              style={{ gap: `${4 * scaleFactor}px` }}
               onClick={() => window.open("https://www.google.com/search?sca_esv=bbe24cb31649d4ed&sxsrf=AE3TifNB0rxkCBcfMPZUq4Cl7B1cbNiwbg:1755185663524&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E5hjw2IezP_Bw3k_5rJeegZLUiDytyxIWp-4-ROn9bNJsQIZRow8EYRYRoeYE65h-v896ClcNr_EJ9DJAT8e-F7HGNkWdkTzWU8S7X92urJefrzAzQ%3D%3D&q=Ming%27s+Chinese+Cuisine+Reviews&sa=X&ved=2ahUKEwie2PSP0IqPAxUBRmcHHfPGIx0Q0bkNegQIPRAD&biw=1470&bih=832&dpr=2", "_blank")}
             >
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star
                   key={star}
-                  className="w-7 h-7 text-orange-500 fill-orange-500"
+                  className="text-orange-500 fill-orange-500"
+                  style={{ width: `${24 * scaleFactor}px`, height: `${24 * scaleFactor}px` }}
                 />
               ))}
             </div>
@@ -91,10 +157,24 @@ export default function Welcome() {
 
           {/* Address Section */}
           <div className="text-center">
-            <div className="bg-white px-6 py-3 rounded-full border-2 border-gray-600 mb-4">
-              <span className="text-gray-800 font-semibold text-base">ADDRESS</span>
+            <div 
+              className="bg-white rounded-full border-2 border-gray-600"
+              style={{
+                padding: `${8 * scaleFactor}px ${24 * scaleFactor}px`,
+                marginBottom: `${12 * scaleFactor}px`,
+              }}
+            >
+              <span 
+                className="text-gray-800 font-semibold"
+                style={{ fontSize: `${12 * scaleFactor}px` }}
+              >
+                ADDRESS
+              </span>
             </div>
-            <div className="text-gray-700 text-sm leading-relaxed">
+            <div 
+              className="text-gray-700 leading-tight"
+              style={{ fontSize: `${11 * scaleFactor}px` }}
+            >
               <p>SHOP NO 2&3, GANGA GODAVARI</p>
               <p>APARTMENT, KATEMANIVALI NAKA,</p>
               <p>PRABHURAM NAGAR, KALYAN EAST,</p>
@@ -105,10 +185,24 @@ export default function Welcome() {
 
           {/* Contact Section */}
           <div className="text-center">
-            <div className="bg-white px-6 py-3 rounded-full border-2 border-gray-600 mb-4">
-              <span className="text-gray-800 font-semibold text-base">CONTACT</span>
+            <div 
+              className="bg-white rounded-full border-2 border-gray-600"
+              style={{
+                padding: `${8 * scaleFactor}px ${24 * scaleFactor}px`,
+                marginBottom: `${12 * scaleFactor}px`,
+              }}
+            >
+              <span 
+                className="text-gray-800 font-semibold"
+                style={{ fontSize: `${12 * scaleFactor}px` }}
+              >
+                CONTACT
+              </span>
             </div>
-            <div className="text-gray-700 text-sm space-y-1">
+            <div 
+              className="text-gray-700"
+              style={{ fontSize: `${11 * scaleFactor}px`, gap: `${4 * scaleFactor}px` }}
+            >
               <p>info@mingschinesecuisine.in</p>
               <p>+91 75069 69333</p>
               <p className="text-orange-500">www.mingschinesecuisine.in</p>
@@ -116,7 +210,10 @@ export default function Welcome() {
           </div>
 
           {/* Developer Credit */}
-          <div className="text-center text-sm text-gray-600">
+          <div 
+            className="text-center text-gray-600"
+            style={{ fontSize: `${10 * scaleFactor}px` }}
+          >
             <p>Developed By</p>
             <p className="text-orange-500 font-medium">AIRAVATA TECHNOLOGIES</p>
           </div>
