@@ -59,12 +59,17 @@ export default function Welcome() {
 
       {/* Responsive background container */}
       <div 
-        className="relative w-full mx-auto bg-cover bg-center bg-no-repeat"
+        className="relative bg-cover bg-center bg-no-repeat md:w-full md:mx-auto w-screen h-screen"
         style={{
           backgroundImage: `url(${backgroundImage})`,
-          maxWidth: `${Math.min(420 * scaleFactor, screenDimensions.width * 0.95)}px`,
-          height: `${containerHeight}px`,
-          aspectRatio: '9/16',
+          ...(screenDimensions.width > 768 ? {
+            maxWidth: `${Math.min(420 * scaleFactor, screenDimensions.width * 0.95)}px`,
+            height: `${containerHeight}px`,
+            aspectRatio: '9/16',
+          } : {
+            width: '100vw',
+            height: '100vh',
+          })
         }}
       >
         {/* Content directly on background - dynamically scaled */}
