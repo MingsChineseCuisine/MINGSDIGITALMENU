@@ -160,12 +160,12 @@ export default function Welcome() {
             <div 
               className="border-2 border-gray-600 rounded-full inline-block"
               style={{
-                padding: `${8 * scaleFactor}px ${24 * scaleFactor}px`,
+                padding: `${4 * scaleFactor}px ${16 * scaleFactor}px`,
                 marginBottom: `${12 * scaleFactor}px`,
               }}
             >
               <span 
-                className="text-gray-800 font-semibold"
+                className="text-orange-500 font-semibold"
                 style={{ fontSize: `${12 * scaleFactor}px` }}
               >
                 ADDRESS
@@ -188,12 +188,12 @@ export default function Welcome() {
             <div 
               className="border-2 border-gray-600 rounded-full inline-block"
               style={{
-                padding: `${8 * scaleFactor}px ${24 * scaleFactor}px`,
+                padding: `${4 * scaleFactor}px ${16 * scaleFactor}px`,
                 marginBottom: `${12 * scaleFactor}px`,
               }}
             >
               <span 
-                className="text-gray-800 font-semibold"
+                className="text-orange-500 font-semibold"
                 style={{ fontSize: `${12 * scaleFactor}px` }}
               >
                 CONTACT
