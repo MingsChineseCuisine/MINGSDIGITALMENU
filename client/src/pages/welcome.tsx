@@ -21,7 +21,7 @@ export default function Welcome() {
 
       // Calculate scale factor based on screen size for better screen utilization
       // Base dimensions: 384px width, optimized for mobile screens
-      
+
       // Scale up for better screen utilization while maintaining proportions
       if (height < 600) {
         setScaleFactor(0.85);
@@ -51,14 +51,14 @@ export default function Welcome() {
 
   // Calculate responsive container height - use more screen space
   const containerHeight = Math.min(screenDimensions.height * 0.98, screenDimensions.height - 20);
-  
+
   return (
     <div className="h-screen w-screen overflow-hidden relative flex items-center justify-center" style={{ backgroundColor: '#FFF5F2' }}>
       {/* Media preloader */}
       <MediaPreloader onComplete={() => setMediaReady(true)} />
 
       {/* Responsive background container */}
-      <div 
+      <div
         className="relative bg-cover bg-center bg-no-repeat md:w-full md:mx-auto w-screen h-screen"
         style={{
           backgroundImage: `url(${backgroundImage})`,
@@ -73,18 +73,18 @@ export default function Welcome() {
         }}
       >
         {/* Content directly on background - dynamically scaled */}
-        <div 
+        <div
           className="flex flex-col items-center justify-center h-full px-4"
           style={{
             padding: `${32 * scaleFactor}px ${16 * scaleFactor}px`,
             gap: `${24 * scaleFactor}px`,
           }}
         >
-          
+
           {/* Ming's Logo */}
           <div className="flex flex-col items-center w-full">
-            <img 
-              src="/images/logo.png" 
+            <img
+              src="/images/logo.png"
               alt="Ming's Chinese Cuisine"
               style={{ width: `${240 * scaleFactor}px`, height: 'auto' }}
             />
@@ -92,8 +92,8 @@ export default function Welcome() {
 
           {/* Social Media Icons */}
           <div className="flex" style={{ gap: `${16 * scaleFactor}px` }}>
-            <button 
-              onClick={() => handleSocialClick("https://instagram.com")}
+            <button
+              onClick={() => handleSocialClick("https://www.instagram.com/mings_chinese_cuisine_kalyan_?igsh=MXVqcGk4ZHhvcjM5Yw==")}
               className="border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
               style={{
                 width: `${48 * scaleFactor}px`,
@@ -102,7 +102,7 @@ export default function Welcome() {
             >
               <Instagram style={{ width: `${20 * scaleFactor}px`, height: `${20 * scaleFactor}px` }} className="text-orange-500" />
             </button>
-            <button 
+            <button
               onClick={() => handleSocialClick("https://facebook.com")}
               className="border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
               style={{
@@ -112,7 +112,7 @@ export default function Welcome() {
             >
               <Facebook style={{ width: `${20 * scaleFactor}px`, height: `${20 * scaleFactor}px` }} className="text-orange-500" />
             </button>
-            <button 
+            <button
               onClick={() => handleSocialClick("https://youtube.com")}
               className="border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
               style={{
@@ -140,13 +140,13 @@ export default function Welcome() {
 
           {/* Rating Section */}
           <div className="text-center">
-            <p 
+            <p
               className="text-orange-500 font-medium mb-2"
               style={{ fontSize: `${14 * scaleFactor}px`, marginBottom: `${8 * scaleFactor}px` }}
             >
               Click to Rate us on Google
             </p>
-            <div 
+            <div
               className="flex justify-center cursor-pointer"
               style={{ gap: `${4 * scaleFactor}px` }}
               onClick={() => window.open("https://www.google.com/search?sca_esv=bbe24cb31649d4ed&sxsrf=AE3TifNB0rxkCBcfMPZUq4Cl7B1cbNiwbg:1755185663524&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E5hjw2IezP_Bw3k_5rJeegZLUiDytyxIWp-4-ROn9bNJsQIZRow8EYRYRoeYE65h-v896ClcNr_EJ9DJAT8e-F7HGNkWdkTzWU8S7X92urJefrzAzQ%3D%3D&q=Ming%27s+Chinese+Cuisine+Reviews&sa=X&ved=2ahUKEwie2PSP0IqPAxUBRmcHHfPGIx0Q0bkNegQIPRAD&biw=1470&bih=832&dpr=2", "_blank")}
@@ -163,21 +163,21 @@ export default function Welcome() {
 
           {/* Address Section */}
           <div className="text-center">
-            <div 
+            <div
               className="border-2 border-gray-600 rounded-full inline-block"
               style={{
                 padding: `${4 * scaleFactor}px ${16 * scaleFactor}px`,
                 marginBottom: `${12 * scaleFactor}px`,
               }}
             >
-              <span 
+              <span
                 className="text-orange-500 font-semibold"
                 style={{ fontSize: `${12 * scaleFactor}px` }}
               >
                 ADDRESS
               </span>
             </div>
-            <div 
+            <div
               className="text-gray-700 leading-tight"
               style={{ fontSize: `${11 * scaleFactor}px` }}
             >
@@ -191,37 +191,49 @@ export default function Welcome() {
 
           {/* Contact Section */}
           <div className="text-center">
-            <div 
+            <div
               className="border-2 border-gray-600 rounded-full inline-block"
               style={{
                 padding: `${4 * scaleFactor}px ${16 * scaleFactor}px`,
                 marginBottom: `${12 * scaleFactor}px`,
               }}
             >
-              <span 
+              <span
                 className="text-orange-500 font-semibold"
                 style={{ fontSize: `${12 * scaleFactor}px` }}
               >
                 CONTACT
               </span>
             </div>
-            <div 
+            <div
               className="text-gray-700"
               style={{ fontSize: `${11 * scaleFactor}px`, gap: `${4 * scaleFactor}px` }}
             >
               <p>info@mingschinesecuisine.in</p>
               <p>+91 75069 69333</p>
-              <p className="text-orange-500">www.mingschinesecuisine.in</p>
+              <p
+                className="text-orange-500 cursor-pointer no-underline"
+                onClick={() => window.open("http://www.mingschinesecuisine.in", "_blank")}
+                style={{ textDecoration: 'none' }}
+              >
+                www.mingschinesecuisine.in
+              </p>
             </div>
           </div>
 
           {/* Developer Credit */}
-          <div 
+          <div
             className="text-center text-gray-600"
             style={{ fontSize: `${10 * scaleFactor}px` }}
           >
             <p>Developed By</p>
-            <p className="text-orange-500 font-medium">AIRAVATA TECHNOLOGIES</p>
+            <p
+              className="text-orange-500 font-medium cursor-pointer no-underline"
+              onClick={() => window.open("http://www.airavatatechnologies.com", "_blank")}
+              style={{ textDecoration: 'none' }}
+            >
+              AIRAVATA TECHNOLOGIES
+            </p>
           </div>
 
         </div>
