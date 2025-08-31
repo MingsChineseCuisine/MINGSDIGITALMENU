@@ -56,28 +56,33 @@ interface SpeechRecognitionConstructor {
 
 // Promotional images for the carousel - Updated with new images without tint/overlay
 const promotionalImages = [
-  {
+   {
     id: 1,
-    src: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb",
+    src: "/images/Banner1.png",
     alt: "Pastry Dishes on Plates",
   },
   {
     id: 2,
+    src: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb",
+    alt: "Pastry Dishes on Plates",
+  },
+  {
+    id: 3,
     src: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb",
     alt: "Empty Bar with Lights",
   },
   {
-    id: 3,
+    id: 4,
     src: "https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb",
     alt: "Clear Wine Glass on Table",
   },
   {
-    id: 4,
+    id: 5,
     src: "https://images.pexels.com/photos/1055058/pexels-photo-1055058.jpeg?auto=compress&cs=tinysrgb",
     alt: "Brown Wooden Table",
   },
   {
-    id: 5,
+    id: 6,
     src: "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb",
     alt: "Traditional Chinese Cuisine",
   },
