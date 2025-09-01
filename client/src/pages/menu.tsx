@@ -58,7 +58,7 @@ interface SpeechRecognitionConstructor {
 const promotionalImages = [
    {
     id: 1,
-    src: "/images/Banner1.png",
+    src: "/images/Banner1.svg",
     alt: "Pastry Dishes on Plates",
   },
   {
