@@ -1643,17 +1643,17 @@ export default function Menu() {
           className="min-w-full h-full relative"
           style={{ flexShrink: 0 }}
         >
-          {/* Mobile/Tablet - SVG stretching to fill width */}
+          {/* Mobile/Tablet - SVG filling both width and height */}
           <svg
             viewBox="0 0 800 450" // Adjust to your SVG's original dimensions
             className="w-full h-full md:hidden"
-            preserveAspectRatio="xMidYMid slice"
+            preserveAspectRatio="none"
           >
             <image
               href={image.src}
               width="100%"
               height="100%"
-              preserveAspectRatio="xMidYMid slice"
+              preserveAspectRatio="none"
             />
           </svg>
           
@@ -1905,3 +1905,4 @@ export default function Menu() {
     </div>
   );
 }
+
