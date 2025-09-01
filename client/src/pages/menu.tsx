@@ -1009,7 +1009,7 @@ const promotionalImages = [
   },
   {
     id: 2,
-    src: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb",
+    src: "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nob16Ws3KP8H8TOFKOv9BvnEWxKz6eQ9Ba7CSqHNbpEE877IZSdlBNDKmDnfbfwg7KPeJ13F6H66fc3NLrcKeke3KNoL8dCNxXNwJI2Q59xZAE97xym-ak0cbw96vXbYvA1UwfkCA=s1360-w1360-h1020-rw",
     alt: "Empty Bar with Lights",
   },
   {
