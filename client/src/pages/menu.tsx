@@ -56,33 +56,28 @@
 
 // // Promotional images for the carousel - Updated with new images without tint/overlay
 // const promotionalImages = [
-//    {
+//   {
 //     id: 1,
 //     src: "/images/Banner1.svg",
-//     alt: "Pastry Dishes on Plates",
+//     alt: "Pastry Dishes on Plates", 
 //   },
 //   {
 //     id: 2,
-//     src: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb",
-//     alt: "Pastry Dishes on Plates",
-//   },
-//   {
-//     id: 3,
 //     src: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb",
 //     alt: "Empty Bar with Lights",
 //   },
 //   {
-//     id: 4,
+//     id: 3,
 //     src: "https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb",
 //     alt: "Clear Wine Glass on Table",
 //   },
 //   {
-//     id: 5,
+//     id: 4,
 //     src: "https://images.pexels.com/photos/1055058/pexels-photo-1055058.jpeg?auto=compress&cs=tinysrgb",
 //     alt: "Brown Wooden Table",
 //   },
 //   {
-//     id: 6,
+//     id: 5,
 //     src: "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb",
 //     alt: "Traditional Chinese Cuisine",
 //   },
@@ -687,46 +682,53 @@
 //         </div>
 //       </div>
 
-//       {/* Promotional Image Carousel */}
-//       <div className="container mx-auto px-3 sm:px-4 mb-3 sm:mb-4">
-//         <div className="relative w-full h-40 sm:h-48 md:h-56 rounded-lg sm:rounded-xl overflow-hidden shadow-lg">
-//           <motion.div
-//             className="flex transition-transform duration-1000 ease-in-out h-full"
-//             style={{
-//               transform: `translateX(-${currentImageIndex * 100}%)`,
-//             }}
+// {/* Promotional Image Carousel */}
+// <div className="container mx-auto px-3 sm:px-4 mb-3 sm:mb-4">
+//   <div className="relative w-full h-40 sm:h-48 md:h-56 rounded-lg sm:rounded-xl overflow-hidden shadow-lg">
+//     <motion.div
+//       className="flex transition-transform duration-1000 ease-in-out h-full"
+//       style={{
+//         transform: `translateX(-${currentImageIndex * 100}%)`,
+//       }}
+//     >
+//       {promotionalImages.map((image) => (
+//         <div
+//           key={image.id}
+//           className="min-w-full h-full relative"
+//           style={{ flexShrink: 0 }}
+//         >
+//           <svg
+//             viewBox="0 0 800 450" // Adjust this to your SVG's original dimensions
+//             className="w-full h-full"
+//             preserveAspectRatio="none"
 //           >
-//             {promotionalImages.map((image) => (
-//               <div
-//                 key={image.id}
-//                 className="min-w-full h-full relative"
-//                 style={{ flexShrink: 0 }}
-//               >
-//                 <img
-//                   src={image.src}
-//                   alt={image.alt}
-//                   className="w-full h-full object-fill"
-//                 />
-//               </div>
-//             ))}
-//           </motion.div>
-
-//           {/* Indicator dots */}
-//           <div className="absolute bottom-2 sm:bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-1 sm:space-x-2">
-//             {promotionalImages.map((_, index) => (
-//               <button
-//                 key={index}
-//                 onClick={() => setCurrentImageIndex(index)}
-//                 className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ${
-//                   index === currentImageIndex
-//                     ? "bg-white shadow-lg scale-125"
-//                     : "bg-white/50 hover:bg-white/75"
-//                 }`}
-//               />
-//             ))}
-//           </div>
+//             <image
+//               href={image.src}
+//               width="100%"
+//               height="100%"
+//               preserveAspectRatio="none"
+//             />
+//           </svg>
 //         </div>
-//       </div>
+//       ))}
+//     </motion.div>
+
+//     {/* Indicator dots */}
+//     <div className="absolute bottom-2 sm:bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-1 sm:space-x-2">
+//       {promotionalImages.map((_, index) => (
+//         <button
+//           key={index}
+//           onClick={() => setCurrentImageIndex(index)}
+//           className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ${
+//             index === currentImageIndex
+//               ? "bg-white shadow-lg scale-125"
+//               : "bg-white/50 hover:bg-white/75"
+//           }`}
+//         />
+//       ))}
+//     </div>
+//   </div>
+// </div>
 
 //       {/* Category Tabs */}
 //       <div className="container mx-auto px-3 sm:px-4 mb-6 sm:mb-8 md:mb-10">
@@ -1628,7 +1630,7 @@ export default function Menu() {
 
 {/* Promotional Image Carousel */}
 <div className="container mx-auto px-3 sm:px-4 mb-3 sm:mb-4">
-  <div className="relative w-full h-40 sm:h-48 md:h-56 rounded-lg sm:rounded-xl overflow-hidden shadow-lg">
+  <div className="relative w-full h-40 sm:h-48 md:h-80 rounded-lg sm:rounded-xl overflow-hidden shadow-lg">
     <motion.div
       className="flex transition-transform duration-1000 ease-in-out h-full"
       style={{
@@ -1641,9 +1643,24 @@ export default function Menu() {
           className="min-w-full h-full relative"
           style={{ flexShrink: 0 }}
         >
+          {/* Mobile/Tablet - SVG stretching to fill width */}
           <svg
-            viewBox="0 0 800 450" // Adjust this to your SVG's original dimensions
-            className="w-full h-full"
+            viewBox="0 0 800 450" // Adjust to your SVG's original dimensions
+            className="w-full h-full md:hidden"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <image
+              href={image.src}
+              width="100%"
+              height="100%"
+              preserveAspectRatio="xMidYMid slice"
+            />
+          </svg>
+          
+          {/* Desktop - SVG filling both width and height */}
+          <svg
+            viewBox="0 0 800 450" // Adjust to your SVG's original dimensions
+            className="w-full h-full hidden md:block"
             preserveAspectRatio="none"
           >
             <image
