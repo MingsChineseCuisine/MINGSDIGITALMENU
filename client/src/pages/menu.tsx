@@ -1004,26 +1004,31 @@ interface SpeechRecognitionConstructor {
 const promotionalImages = [
   {
     id: 1,
-    src: "/images/Banner1.svg",
+    src: "/images/onamm.svg",
     alt: "Pastry Dishes on Plates", 
   },
   {
     id: 2,
+    src: "/images/Banner1.svg",
+    alt: "Pastry Dishes on Plates", 
+  },
+  {
+    id: 3,
     src: "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nob16Ws3KP8H8TOFKOv9BvnEWxKz6eQ9Ba7CSqHNbpEE877IZSdlBNDKmDnfbfwg7KPeJ13F6H66fc3NLrcKeke3KNoL8dCNxXNwJI2Q59xZAE97xym-ak0cbw96vXbYvA1UwfkCA=s1360-w1360-h1020-rw",
     alt: "Empty Bar with Lights",
   },
   {
-    id: 3,
+    id: 4,
     src: "https://lh3.googleusercontent.com/gps-cs-s/AC9h4npwZDW7MVE2IuhOsNWdhs-EHvrgZqU9K-pyx6nFMoD__LBo1iIdy0OdnaWPKQKS6IFlH3NrOtjnRicB13N6ZXVhslBBmTqGX5vEK62jMV1cRPRFqhf3PqFdIC7fAvImU0FG9mI=s1360-w1360-h1020-rw",
     alt: "Clear Wine Glass on Table",
   },
   {
-    id: 4,
+    id: 5,
     src: "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nrfRwKigEWclEiRnLKKTuG5mSnQTkORildOcBv03n6qqc-lK2jQms_O6AWhF8SsUkFkaUgIjXX70Rh_uMhbfrxFXXiyIF0dYand-TfH6NpunwgPh4dp5_4xgHyc6i_qQE--QfA=s1360-w1360-h1020-rw",
     alt: "Brown Wooden Table",
   },
   {
-    id: 5,
+    id: 6,
     src: "https://lh3.googleusercontent.com/gps-cs-s/AC9h4npF0w6kp7zIjTZ8LL_d2Hx0GDOT02JnPcam0iSsSPQXn62WAmJO3I_6xWG7Lx-liM5rWLgiiRcZkqrKHVNChO0cYr30Cp-kAvKsu3sY6-75lKiDsd4o4poff8j8VL0aVeEj83ZeIQ=s1360-w1360-h1020-rw",
     alt: "Traditional Chinese Cuisine",
   },
