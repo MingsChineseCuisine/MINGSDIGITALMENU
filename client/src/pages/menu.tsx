@@ -58,7 +58,7 @@ interface SpeechRecognitionConstructor {
 const promotionalImages = [
   {
     id: 1,
-    src: "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nob16Ws3KP8H8TOFKOv9BvnEWxKz6eQ9Ba7CSqHNbpEE877IZSdlBNDKmDnfbfwg7KPeJ13F6H66fc3NLrcKeke3KNoL8dCNxXNwJI2Q59xZAE97xym-ak0cbw96vXbYvA1UwfkCA=s1360-w1360-h1020-rw",
+    src: "/images/Navratri.png",
     alt: "Pastry Dishes on Plates", 
   },
   {
