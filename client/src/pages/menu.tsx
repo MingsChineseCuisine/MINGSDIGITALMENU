@@ -58,7 +58,8 @@ interface SpeechRecognitionConstructor {
 const promotionalImages = [
   {
     id: 1,
-    src: "https://mingschinesecuisine.in/assets/gallary1_1756277345984-LJUZOhXj.png",
+    src: "/images/Diwali.png",
+    // src: "https://mingschinesecuisine.in/assets/gallary1_1756277345984-LJUZOhXj.png",
     alt: "Pastry Dishes on Plates", 
   },
   {
