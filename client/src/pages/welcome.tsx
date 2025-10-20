@@ -93,7 +93,6 @@ export default function Welcome() {
           {/* Social Media Icons */}
           <div className="flex" style={{ gap: `${16 * scaleFactor}px` }}>
             <button
-              {/* onClick={() => handleSocialClick("https://www.instagram.com/mings_chinese_cuisine_kalyan_?igsh=MXVqcGk4ZHhvcjM5Yw==")} */}
               onClick={() => handleSocialClick("https://www.instagram.com/mingschinesecuisine.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==")}
               className="border-2 border-orange-500 rounded-lg flex items-center justify-center bg-white hover:bg-orange-50 transition-colors"
               style={{
